@@ -1,0 +1,6655 @@
+<!DOCTYPE html>
+<html lang="en-NP">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Panel | Gajuri Dental Clinic</title>
+
+    <meta
+        name="description"
+        content="Gajuri Dental Clinic administration panel."
+    >
+
+    <meta
+        name="robots"
+        content="noindex,nofollow"
+    >
+
+    <style>
+        :root {
+            --primary: #126b72;
+            --primary-dark: #0d555b;
+            --primary-light: #eaf7f7;
+
+            --text: #172629;
+            --muted: #718083;
+
+            --border: #e2e9ea;
+            --background: #f5f8f8;
+            --white: #ffffff;
+
+            --success: #23784f;
+            --success-bg: #eaf7ef;
+
+            --danger: #c63e3e;
+            --danger-bg: #fff0f0;
+
+            --warning: #9a741d;
+            --warning-bg: #fff8e7;
+
+            --shadow:
+                0 12px 40px rgba(18, 50, 54, 0.07);
+
+            --radius: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+            opacity: .65;
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =====================================================
+           LOGIN
+        ===================================================== */
+
+        #loginScreen {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+
+            background: #f7fafa;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+
+            background: #fff;
+
+            border: 1px solid var(--border);
+            border-radius: 20px;
+
+            padding: 42px 35px;
+
+            text-align: center;
+
+            box-shadow: var(--shadow);
+        }
+
+        .login-logo {
+            width: 78px;
+            height: 78px;
+
+            object-fit: contain;
+
+            margin: 0 auto 20px;
+        }
+
+        .login-card h1 {
+            font-size: 26px;
+            line-height: 1.2;
+
+            letter-spacing: -.5px;
+
+            margin-bottom: 8px;
+        }
+
+        .login-card p {
+            color: var(--muted);
+            font-size: 13px;
+
+            margin-bottom: 28px;
+        }
+
+        .google-btn {
+            width: 100%;
+            min-height: 50px;
+
+            border: 1px solid #dfe7e8;
+            border-radius: 10px;
+
+            background: #fff;
+            color: var(--text);
+
+            font-size: 13px;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 11px;
+
+            transition: .2s ease;
+        }
+
+        .google-btn:hover {
+            border-color: #c5d4d5;
+            box-shadow: 0 5px 18px rgba(0,0,0,.05);
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .login-message {
+            min-height: 20px;
+
+            margin-top: 17px;
+
+            font-size: 12px;
+        }
+
+        .login-message.error {
+            color: var(--danger);
+        }
+
+        .login-message.success {
+            color: var(--success);
+        }
+
+        /* =====================================================
+           APP
+        ===================================================== */
+
+        #adminApp {
+            display: none;
+            min-height: 100vh;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .top-header {
+            height: 72px;
+
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 28px;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+        }
+
+        .brand strong {
+            display: block;
+
+            font-size: 15px;
+            line-height: 1.2;
+        }
+
+        .brand span {
+            display: block;
+
+            color: var(--muted);
+            font-size: 11px;
+
+            margin-top: 2px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .user-photo {
+            width: 37px;
+            height: 37px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            background: var(--primary-light);
+        }
+
+        .user-details {
+            text-align: right;
+        }
+
+        .user-details strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .user-details span {
+            display: block;
+
+            color: var(--muted);
+            font-size: 10px;
+
+            margin-top: 1px;
+        }
+
+        .logout-btn {
+            border: 1px solid var(--border);
+            background: #fff;
+
+            color: var(--text);
+
+            border-radius: 9px;
+
+            padding: 9px 14px;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .logout-btn:hover {
+            background: #f8fafa;
+        }
+
+        /* =====================================================
+           LAYOUT
+        ===================================================== */
+
+        .layout {
+            display: flex;
+            min-height: calc(100vh - 72px);
+        }
+
+        .sidebar {
+            width: 245px;
+            flex-shrink: 0;
+
+            background: #fff;
+            border-right: 1px solid var(--border);
+
+            padding: 22px 13px;
+
+            position: sticky;
+            top: 72px;
+
+            height: calc(100vh - 72px);
+
+            overflow-y: auto;
+        }
+
+        .sidebar-title {
+            color: #899698;
+
+            font-size: 9px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+
+            padding: 0 12px;
+
+            margin:
+                7px 0 9px;
+        }
+
+        .side-btn {
+            width: 100%;
+
+            border: 0;
+            background: transparent;
+
+            color: #536467;
+
+            padding: 11px 12px;
+
+            border-radius: 9px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-align: left;
+
+            margin-bottom: 3px;
+
+            transition: .2s ease;
+        }
+
+        .side-btn svg {
+            width: 18px;
+            height: 18px;
+
+            flex-shrink: 0;
+        }
+
+        .side-btn:hover {
+            background: #f3f7f7;
+            color: var(--primary);
+        }
+
+        .side-btn.active {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .main {
+            flex: 1;
+            min-width: 0;
+
+            padding: 32px;
+        }
+
+        .page {
+            display: none;
+
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* =====================================================
+           PAGE HEADER
+        ===================================================== */
+
+        .page-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            gap: 20px;
+
+            margin-bottom: 25px;
+        }
+
+        .page-head h1 {
+            font-size: 27px;
+            line-height: 1.2;
+
+            letter-spacing: -.6px;
+
+            margin-bottom: 5px;
+        }
+
+        .page-head p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           CARDS
+        ===================================================== */
+
+        .card {
+            background: #fff;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            box-shadow:
+                0 4px 20px rgba(18,50,54,.035);
+        }
+
+        .card-head {
+            padding: 19px 21px;
+
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .card-head h2 {
+            font-size: 15px;
+        }
+
+        .card-head p {
+            color: var(--muted);
+            font-size: 11px;
+
+            margin-top: 2px;
+        }
+
+        .card-body {
+            padding: 21px;
+        }
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .stats-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 15px;
+
+            margin-bottom: 21px;
+        }
+
+        .stat-card {
+            padding: 19px;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 11px;
+
+            margin-bottom: 6px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 750;
+
+            letter-spacing: -.7px;
+        }
+
+        .stat-description {
+            color: var(--muted);
+            font-size: 10px;
+
+            margin-top: 3px;
+        }
+
+        /* =====================================================
+           DASHBOARD
+        ===================================================== */
+
+        .dashboard-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.35fr .65fr;
+
+            gap: 19px;
+        }
+
+        .quick-actions {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 10px;
+        }
+
+        .quick-btn {
+            border: 1px solid var(--border);
+            background: #fff;
+
+            border-radius: 10px;
+
+            padding: 16px;
+
+            text-align: left;
+
+            transition: .2s ease;
+        }
+
+        .quick-btn:hover {
+            border-color: #bfd0d1;
+            transform: translateY(-1px);
+        }
+
+        .quick-btn strong {
+            display: block;
+
+            font-size: 12px;
+
+            margin-bottom: 4px;
+        }
+
+        .quick-btn span {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            display: flex;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 10px 0;
+
+            border-bottom:
+                1px solid #edf1f1;
+
+            font-size: 11px;
+        }
+
+        .info-list li:last-child {
+            border-bottom: 0;
+        }
+
+        .info-list li span {
+            color: var(--muted);
+        }
+
+        .info-list strong {
+            text-align: right;
+            word-break: break-word;
+        }
+
+        /* =====================================================
+           FORMS
+        ===================================================== */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+
+            gap: 6px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: #435457;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+
+            border: 1px solid #dce5e6;
+            border-radius: 9px;
+
+            padding: 11px 12px;
+
+            background: #fff;
+            color: var(--text);
+
+            outline: none;
+
+            font-size: 12px;
+
+            transition: .2s ease;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px rgba(18,107,114,.08);
+        }
+
+        input[readonly] {
+            background: #f7fafa;
+            color: #637274;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .help-text {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+
+            gap: 9px;
+
+            margin-top: 19px;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 9px;
+
+            padding: 10px 16px;
+
+            font-size: 11px;
+            font-weight: 750;
+
+            transition: .2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: #edf3f3;
+            color: #405255;
+        }
+
+        .btn-danger {
+            background: var(--danger-bg);
+            color: var(--danger);
+        }
+
+        .btn-small {
+            padding: 7px 10px;
+            font-size: 10px;
+        }
+
+        .file-input {
+            padding: 9px;
+            background: #fafcfc;
+        }
+
+        /* =====================================================
+           UPLOAD PROGRESS
+        ===================================================== */
+
+        .upload-status {
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            background: var(--primary-light);
+            color: #245f64;
+
+            font-size: 11px;
+        }
+
+        .upload-status.show {
+            display: block;
+        }
+
+        .progress-bar {
+            height: 5px;
+
+            background: #d7e9e9;
+
+            border-radius: 99px;
+
+            overflow: hidden;
+
+            margin-top: 8px;
+        }
+
+        .progress-value {
+            width: 0%;
+            height: 100%;
+
+            background: var(--primary);
+
+            transition: width .25s ease;
+        }
+
+        /* =====================================================
+           IMAGE PREVIEW
+        ===================================================== */
+
+        .upload-preview {
+            display: none;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            background: #fafcfc;
+        }
+
+        .upload-preview.show {
+            display: block;
+        }
+
+        .upload-preview img {
+            width: 100%;
+            max-height: 270px;
+
+            object-fit: contain;
+
+            background: #f1f5f5;
+        }
+
+        .preview-info {
+            padding: 9px 11px;
+
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        /* =====================================================
+           TOOLBAR
+        ===================================================== */
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 17px;
+        }
+
+        .toolbar-left,
+        .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* =====================================================
+           GALLERY
+        ===================================================== */
+
+        .gallery-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 16px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+
+            background: #fff;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .gallery-media {
+            position: relative;
+
+            aspect-ratio: 16 / 10;
+
+            background: #edf2f2;
+
+            overflow: hidden;
+        }
+
+        .gallery-media.vertical {
+            aspect-ratio: 4 / 5;
+        }
+
+        .gallery-media img,
+        .gallery-media video {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        .status-badge {
+            position: absolute;
+
+            top: 9px;
+            left: 9px;
+
+            padding: 4px 8px;
+
+            border-radius: 999px;
+
+            background: rgba(255,255,255,.94);
+
+            font-size: 9px;
+            font-weight: 750;
+        }
+
+        .status-badge.active {
+            color: var(--success);
+        }
+
+        .status-badge.inactive {
+            color: var(--danger);
+        }
+
+        .gallery-content {
+            padding: 13px;
+        }
+
+        .gallery-content h3 {
+            font-size: 12px;
+
+            margin-bottom: 3px;
+        }
+
+        .gallery-content p {
+            color: var(--muted);
+
+            font-size: 10px;
+
+            min-height: 30px;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+
+            overflow: hidden;
+        }
+
+        .gallery-meta {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 10px;
+            padding-top: 9px;
+
+            border-top:
+                1px solid #edf1f1;
+
+            color: var(--muted);
+
+            font-size: 9px;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 5px;
+
+            margin-top: 10px;
+        }
+
+        /* =====================================================
+           BANNERS
+        ===================================================== */
+
+        .banner-row {
+            display: grid;
+
+            grid-template-columns:
+                220px 1fr auto;
+
+            align-items: center;
+
+            gap: 16px;
+
+            padding: 14px 0;
+
+            border-bottom:
+                1px solid #edf1f1;
+        }
+
+        .banner-row:last-child {
+            border-bottom: 0;
+        }
+
+        .banner-image {
+            width: 220px;
+            height: 105px;
+
+            object-fit: cover;
+
+            border-radius: 9px;
+
+            background: #edf2f2;
+        }
+
+        .banner-info strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .banner-info p {
+            color: var(--muted);
+
+            font-size: 10px;
+
+            margin-top: 3px;
+        }
+
+        .banner-meta {
+            display: block;
+
+            font-size: 9px;
+
+            margin-top: 6px;
+        }
+
+        .banner-meta.active {
+            color: var(--success);
+        }
+
+        .banner-meta.inactive {
+            color: var(--danger);
+        }
+
+        .banner-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        /* =====================================================
+           TABLE
+        ===================================================== */
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 760px;
+
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f8fafa;
+
+            color: #6c7b7d;
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+            letter-spacing: .7px;
+
+            text-align: left;
+
+            padding: 12px;
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        td {
+            padding: 13px 12px;
+
+            border-bottom:
+                1px solid #edf1f1;
+
+            font-size: 11px;
+
+            vertical-align: top;
+        }
+
+        td small {
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        /* =====================================================
+           NOTICE
+        ===================================================== */
+
+        .notice {
+            border-radius: 10px;
+
+            padding: 12px 14px;
+
+            margin-bottom: 18px;
+
+            font-size: 11px;
+        }
+
+        .notice.info {
+            background: var(--primary-light);
+            color: #245e63;
+        }
+
+        .notice.warning {
+            background: var(--warning-bg);
+            color: var(--warning);
+        }
+
+        /* =====================================================
+           EMPTY / LOADING
+        ===================================================== */
+
+        .loading {
+            min-height: 100px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            padding: 45px 20px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        .spinner {
+            width: 15px;
+            height: 15px;
+
+            border: 2px solid #dbe6e6;
+            border-top-color: var(--primary);
+
+            border-radius: 50%;
+
+            animation:
+                spin .75s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =====================================================
+           MODAL
+        ===================================================== */
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(15,32,35,.5);
+
+            z-index: 500;
+        }
+
+        .modal-backdrop.show {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 650px;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: #fff;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,.2);
+        }
+
+        .modal-head {
+            padding: 17px 20px;
+
+            border-bottom:
+                1px solid var(--border);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-head h2 {
+            font-size: 15px;
+        }
+
+        .modal-close {
+            border: 0;
+            background: transparent;
+
+            color: var(--muted);
+
+            font-size: 23px;
+
+            line-height: 1;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        /* =====================================================
+           TOAST
+        ===================================================== */
+
+        #toast {
+            position: fixed;
+
+            right: 23px;
+            bottom: 23px;
+
+            max-width: 380px;
+
+            padding: 13px 16px;
+
+            border-radius: 10px;
+
+            background: #18292c;
+            color: #fff;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            box-shadow:
+                0 12px 35px rgba(0,0,0,.18);
+
+            opacity: 0;
+            pointer-events: none;
+
+            transform:
+                translateY(15px);
+
+            transition: .25s ease;
+
+            z-index: 1000;
+        }
+
+        #toast.show {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+        #toast.success {
+            background: var(--success);
+        }
+
+        #toast.error {
+            background: var(--danger);
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        .mobile-menu-btn {
+            display: none;
+
+            width: 39px;
+            height: 39px;
+
+            border: 1px solid var(--border);
+            background: #fff;
+
+            border-radius: 9px;
+        }
+
+        @media (max-width: 1100px) {
+
+            .stats-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .main {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 760px) {
+
+            .top-header {
+                height: 64px;
+                padding: 0 14px;
+            }
+
+            .brand img {
+                width: 37px;
+                height: 37px;
+            }
+
+            .brand > div {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .brand {
+                gap: 8px;
+            }
+
+            .header-right {
+                gap: 8px;
+            }
+
+            .user-details {
+                display: none;
+            }
+
+            .logout-btn {
+                padding: 8px 10px;
+            }
+
+            .layout {
+                display: block;
+            }
+
+            .sidebar {
+                position: fixed;
+
+                top: 64px;
+                left: 0;
+                bottom: 0;
+
+                width: 260px;
+                height: auto;
+
+                z-index: 90;
+
+                transform:
+                    translateX(-100%);
+
+                transition:
+                    transform .25s ease;
+
+                box-shadow:
+                    8px 0 30px rgba(0,0,0,.08);
+            }
+
+            .sidebar.open {
+                transform:
+                    translateX(0);
+            }
+
+            .main {
+                padding: 20px 14px;
+            }
+
+            .page-head {
+                display: block;
+            }
+
+            .page-head h1 {
+                font-size: 23px;
+            }
+
+            .stats-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                gap: 9px;
+            }
+
+            .stat-card {
+                padding: 15px;
+            }
+
+            .stat-value {
+                font-size: 22px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .toolbar-left,
+            .toolbar-right {
+                width: 100%;
+            }
+
+            .toolbar select {
+                flex: 1;
+            }
+
+            .card-head,
+            .card-body {
+                padding: 16px;
+            }
+
+            .banner-row {
+                grid-template-columns: 1fr;
+            }
+
+            .banner-image {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 16 / 7;
+            }
+
+            .banner-actions {
+                justify-content: flex-start;
+            }
+
+            #toast {
+                left: 14px;
+                right: 14px;
+                bottom: 14px;
+                max-width: none;
+            }
+
+            .login-card {
+                padding: 32px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     LOGIN SCREEN
+===================================================== -->
+
+<section id="loginScreen">
+
+    <div class="login-card">
+
+        <img
+            src="images/logo.png"
+            alt="Gajuri Dental Clinic"
+            class="login-logo"
+            onerror="this.style.display='none'"
+        >
+
+        <h1>
+            Gajuri Dental Clinic
+        </h1>
+
+        <p>
+            Secure administration panel.
+            Sign in with an authorized Google account.
+        </p>
+
+        <button
+            id="googleLoginBtn"
+            class="google-btn"
+            type="button"
+        >
+
+            <svg
+                class="google-icon"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    fill="#4285F4"
+                    d="M21.35 12.27c0-.78-.07-1.53-.22-2.25H12v4.26h5.22a4.46 4.46 0 0 1-1.94 2.93v2.44h3.14c1.84-1.69 2.93-4.18 2.93-7.38Z"
+                />
+
+                <path
+                    fill="#34A853"
+                    d="M12 21.99c2.63 0 4.84-.87 6.45-2.35l-3.14-2.44c-.87.58-1.98.93-3.31.93-2.54 0-4.7-1.72-5.47-4.03H3.29v2.52A9.74 9.74 0 0 0 12 21.99Z"
+                />
+
+                <path
+                    fill="#FBBC05"
+                    d="M6.53 14.1A5.85 5.85 0 0 1 6.22 12c0-.73.13-1.43.31-2.1V7.38H3.29A9.99 9.99 0 0 0 2 12c0 1.61.39 3.13 1.29 4.62l3.24-2.52Z"
+                />
+
+                <path
+                    fill="#EA4335"
+                    d="M12 5.88c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.83 2.97 14.63 2 12 2a9.74 9.74 0 0 0-8.71 5.38l3.24 2.52C7.3 7.6 9.46 5.88 12 5.88Z"
+                />
+            </svg>
+
+            Continue with Google
+
+        </button>
+
+        <div
+            id="loginMessage"
+            class="login-message"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ADMIN APP
+===================================================== -->
+
+<div id="adminApp">
+
+    <!-- HEADER -->
+
+    <header class="top-header">
+
+        <div class="brand">
+
+            <button
+                id="mobileMenuBtn"
+                class="mobile-menu-btn"
+                type="button"
+                aria-label="Open menu"
+            >
+
+                <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path d="M4 6h16"/>
+                    <path d="M4 12h16"/>
+                    <path d="M4 18h16"/>
+                </svg>
+
+            </button>
+
+            <img
+                src="images/logo.png"
+                alt="Gajuri Dental Clinic"
+                onerror="this.style.display='none'"
+            >
+
+            <div>
+
+                <strong>
+                    Gajuri Dental Clinic
+                </strong>
+
+                <span>
+                    Administration Panel
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <div class="user-info">
+
+                <img
+                    id="userPhoto"
+                    class="user-photo"
+                    src=""
+                    alt="Administrator"
+                >
+
+                <div class="user-details">
+
+                    <strong id="userName">
+                        Administrator
+                    </strong>
+
+                    <span id="userEmail">
+                        —
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button
+                id="logoutBtn"
+                class="logout-btn"
+                type="button"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <div class="layout">
+
+        <!-- SIDEBAR -->
+
+        <aside
+            id="sidebar"
+            class="sidebar"
+        >
+
+            <div class="sidebar-title">
+                Dashboard
+            </div>
+
+            <button
+                class="side-btn active"
+                data-page="dashboard"
+                type="button"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                >
+                    <rect x="3" y="3" width="7" height="7"/>
+                    <rect x="14" y="3" width="7" height="7"/>
+                    <rect x="3" y="14" width="7" height="7"/>
+                    <rect x="14" y="14" width="7" height="7"/>
+                </svg>
+
+                Dashboard
+
+            </button>
+
+
+            <div class="sidebar-title">
+                Website Content
+            </div>
+
+            <button
+                class="side-btn"
+                data-page="banners"
+                type="button"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                >
+                    <rect x="3" y="4" width="18" height="16" rx="2"/>
+                    <circle cx="8.5" cy="9" r="1.5"/>
+                    <path d="m21 15-5-5L5 20"/>
+                </svg>
+
+                Banners
+
+            </button>
+
+
+            <button
+                class="side-btn"
+                data-page="gallery"
+                type="button"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                >
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <path d="m21 15-5-5L5 20"/>
+                </svg>
+
+                Photo Gallery
+
+            </button>
+
+
+            <button
+                class="side-btn"
+                data-page="videos"
+                type="button"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                >
+                    <rect x="3" y="5" width="18" height="14" rx="2"/>
+                    <path d="m10 9 5 3-5 3V9Z"/>
+                </svg>
+
+                Video Gallery
+
+            </button>
+
+
+            <div class="sidebar-title">
+                Patient Data
+            </div>
+
+            <button
+                class="side-btn"
+                data-page="inquiries"
+                type="button"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                >
+                    <path d="M4 5h16v12H7l-3 3V5Z"/>
+                    <path d="M8 9h8"/>
+                    <path d="M8 13h5"/>
+                </svg>
+
+                Patient Inquiries
+
+            </button>
+
+
+            <div class="sidebar-title">
+                Account
+            </div>
+
+            <a
+                href="index.html"
+                class="side-btn"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                >
+                    <path d="M3 11.5 12 4l9 7.5"/>
+                    <path d="M5 10v10h14V10"/>
+                </svg>
+
+                View Website
+
+            </a>
+
+        </aside>
+
+
+        <!-- MAIN -->
+
+        <main class="main">
+
+
+            <!-- =================================================
+                 DASHBOARD
+            ================================================= -->
+
+            <section
+                id="page-dashboard"
+                class="page active"
+            >
+
+                <div class="page-head">
+
+                    <div>
+
+                        <h1>
+                            Dashboard
+                        </h1>
+
+                        <p>
+                            Manage Gajuri Dental Clinic website content.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="card stat-card">
+
+                        <div class="stat-label">
+                            Total Gallery Items
+                        </div>
+
+                        <div
+                            id="statGallery"
+                            class="stat-value"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-description">
+                            Photos and videos
+                        </div>
+
+                    </div>
+
+
+                    <div class="card stat-card">
+
+                        <div class="stat-label">
+                            Active Items
+                        </div>
+
+                        <div
+                            id="statActive"
+                            class="stat-value"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-description">
+                            Currently visible
+                        </div>
+
+                    </div>
+
+
+                    <div class="card stat-card">
+
+                        <div class="stat-label">
+                            Banners
+                        </div>
+
+                        <div
+                            id="statBanners"
+                            class="stat-value"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-description">
+                            Homepage banners
+                        </div>
+
+                    </div>
+
+
+                    <div class="card stat-card">
+
+                        <div class="stat-label">
+                            Inquiries
+                        </div>
+
+                        <div
+                            id="statInquiries"
+                            class="stat-value"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-description">
+                            Patient submissions
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-grid">
+
+                    <div class="card">
+
+                        <div class="card-head">
+
+                            <div>
+
+                                <h2>
+                                    Quick Actions
+                                </h2>
+
+                                <p>
+                                    Common administration tasks
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <div class="quick-actions">
+
+                                <button
+                                    class="quick-btn"
+                                    data-page-target="gallery"
+                                    type="button"
+                                >
+
+                                    <strong>
+                                        Add Gallery Photo
+                                    </strong>
+
+                                    <span>
+                                        Upload a clinic photograph
+                                    </span>
+
+                                </button>
+
+
+                                <button
+                                    class="quick-btn"
+                                    data-page-target="videos"
+                                    type="button"
+                                >
+
+                                    <strong>
+                                        Add Video
+                                    </strong>
+
+                                    <span>
+                                        Add a horizontal clinic video
+                                    </span>
+
+                                </button>
+
+
+                                <button
+                                    class="quick-btn"
+                                    data-page-target="banners"
+                                    type="button"
+                                >
+
+                                    <strong>
+                                        Manage Banners
+                                    </strong>
+
+                                    <span>
+                                        Manage homepage banners
+                                    </span>
+
+                                </button>
+
+
+                                <button
+                                    class="quick-btn"
+                                    data-page-target="inquiries"
+                                    type="button"
+                                >
+
+                                    <strong>
+                                        Patient Inquiries
+                                    </strong>
+
+                                    <span>
+                                        Review patient messages
+                                    </span>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <div class="card-head">
+
+                            <div>
+
+                                <h2>
+                                    Clinic Information
+                                </h2>
+
+                                <p>
+                                    Public clinic information
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <ul class="info-list">
+
+                                <li>
+                                    <span>Clinic</span>
+
+                                    <strong>
+                                        Gajuri Dental Clinic
+                                    </strong>
+                                </li>
+
+                                <li>
+                                    <span>Location</span>
+
+                                    <strong>
+                                        Gajuri-1, Dhading
+                                    </strong>
+                                </li>
+
+                                <li>
+                                    <span>Phone</span>
+
+                                    <strong>
+                                        9843093078
+                                    </strong>
+                                </li>
+
+                                <li>
+                                    <span>Email</span>
+
+                                    <strong>
+                                        deelipshrestha90@gmail.com
+                                    </strong>
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 BANNERS
+            ================================================= -->
+
+            <section
+                id="page-banners"
+                class="page"
+            >
+
+                <div class="page-head">
+
+                    <div>
+
+                        <h1>
+                            Homepage Banners
+                        </h1>
+
+                        <p>
+                            Manage the large images displayed
+                            on the homepage.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notice info">
+
+                    Add banner images using their public image URL.
+                    Active banners are displayed on the homepage
+                    according to their order.
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-head">
+
+                        <div>
+
+                            <h2>
+                                Add Banner
+                            </h2>
+
+                            <p>
+                                Create a new homepage banner.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <form id="bannerForm">
+
+                            <div class="form-grid">
+
+                                <div class="form-group full">
+
+                                    <label>
+                                        Banner Image URL
+                                    </label>
+
+                                    <input
+                                        id="bannerImageUrl"
+                                        type="url"
+                                        placeholder="https://..."
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Title
+                                    </label>
+
+                                    <input
+                                        id="bannerTitle"
+                                        type="text"
+                                        maxlength="120"
+                                        placeholder="Optional title"
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Subtitle
+                                    </label>
+
+                                    <input
+                                        id="bannerSubtitle"
+                                        type="text"
+                                        maxlength="180"
+                                        placeholder="Optional subtitle"
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Display Order
+                                    </label>
+
+                                    <input
+                                        id="bannerOrder"
+                                        type="number"
+                                        min="1"
+                                        value="1"
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Status
+                                    </label>
+
+                                    <select id="bannerActive">
+
+                                        <option value="true">
+                                            Active
+                                        </option>
+
+                                        <option value="false">
+                                            Inactive
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-actions">
+
+                                <button
+                                    type="reset"
+                                    class="btn btn-secondary"
+                                >
+                                    Clear
+                                </button>
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary"
+                                >
+                                    Save Banner
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="card"
+                    style="margin-top:20px;"
+                >
+
+                    <div class="card-head">
+
+                        <div>
+
+                            <h2>
+                                Existing Banners
+                            </h2>
+
+                            <p>
+                                Banners stored in Firestore.
+                            </p>
+
+                        </div>
+
+                        <button
+                            id="refreshBannersBtn"
+                            class="btn btn-secondary btn-small"
+                            type="button"
+                        >
+                            Refresh
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="bannerList"
+                        class="card-body"
+                    >
+
+                        <div class="loading">
+
+                            <div class="spinner"></div>
+
+                            Loading banners...
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PHOTO GALLERY
+            ================================================= -->
+
+            <section
+                id="page-gallery"
+                class="page"
+            >
+
+                <div class="page-head">
+
+                    <div>
+
+                        <h1>
+                            Photo Gallery
+                        </h1>
+
+                        <p>
+                            Upload and manage clinic photographs.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notice info">
+
+                    Select an image and click Save Photo.
+                    The image will automatically upload to ImgBB,
+                    then its URL and information will be stored
+                    in Firebase.
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-head">
+
+                        <div>
+
+                            <h2>
+                                Add Photo
+                            </h2>
+
+                            <p>
+                                Upload a new gallery photograph.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <form id="galleryForm">
+
+                            <div class="form-grid">
+
+                                <!-- FILE -->
+
+                                <div class="form-group full">
+
+                                    <label
+                                        for="galleryFile"
+                                    >
+                                        Select Image
+                                    </label>
+
+                                    <input
+                                        id="galleryFile"
+                                        class="file-input"
+                                        type="file"
+                                        accept="image/jpeg,image/png,image/webp"
+                                    >
+
+                                    <span class="help-text">
+                                        JPG, PNG or WebP. Maximum 10 MB.
+                                    </span>
+
+                                </div>
+
+
+                                <!-- PREVIEW -->
+
+                                <div
+                                    id="galleryPreview"
+                                    class="upload-preview form-group full"
+                                >
+
+                                    <img
+                                        id="galleryPreviewImage"
+                                        src=""
+                                        alt="Selected image preview"
+                                    >
+
+                                    <div
+                                        id="galleryPreviewInfo"
+                                        class="preview-info"
+                                    ></div>
+
+                                </div>
+
+
+                                <!-- IMAGE URL -->
+
+                                <div class="form-group full">
+
+                                    <label
+                                        for="galleryImageUrl"
+                                    >
+                                        Image URL
+                                    </label>
+
+                                    <input
+                                        id="galleryImageUrl"
+                                        type="url"
+                                        placeholder="ImgBB URL will appear automatically"
+                                        readonly
+                                    >
+
+                                </div>
+
+
+                                <!-- TITLE -->
+
+                                <div class="form-group">
+
+                                    <label
+                                        for="galleryTitle"
+                                    >
+                                        Photo Title
+                                    </label>
+
+                                    <input
+                                        id="galleryTitle"
+                                        type="text"
+                                        maxlength="120"
+                                        placeholder="Example: Clinic Reception"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <!-- ORIENTATION -->
+
+                                <div class="form-group">
+
+                                    <label
+                                        for="galleryOrientation"
+                                    >
+                                        Orientation
+                                    </label>
+
+                                    <select
+                                        id="galleryOrientation"
+                                    >
+
+                                        <option value="horizontal">
+                                            Horizontal
+                                        </option>
+
+                                        <option value="vertical">
+                                            Vertical
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- CAPTION -->
+
+                                <div class="form-group full">
+
+                                    <label
+                                        for="galleryCaption"
+                                    >
+                                        Caption
+                                    </label>
+
+                                    <textarea
+                                        id="galleryCaption"
+                                        maxlength="220"
+                                        placeholder="Short description of the photograph"
+                                    ></textarea>
+
+                                </div>
+
+
+                                <!-- ORDER -->
+
+                                <div class="form-group">
+
+                                    <label
+                                        for="galleryOrder"
+                                    >
+                                        Display Order
+                                    </label>
+
+                                    <input
+                                        id="galleryOrder"
+                                        type="number"
+                                        min="1"
+                                        value="1"
+                                    >
+
+                                </div>
+
+
+                                <!-- STATUS -->
+
+                                <div class="form-group">
+
+                                    <label
+                                        for="galleryActive"
+                                    >
+                                        Status
+                                    </label>
+
+                                    <select
+                                        id="galleryActive"
+                                    >
+
+                                        <option value="true">
+                                            Active
+                                        </option>
+
+                                        <option value="false">
+                                            Inactive
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- UPLOAD STATUS -->
+
+                            <div
+                                id="uploadStatus"
+                                class="upload-status"
+                            >
+
+                                <div
+                                    id="uploadStatusText"
+                                >
+                                    Preparing upload...
+                                </div>
+
+                                <div class="progress-bar">
+
+                                    <div
+                                        id="progressValue"
+                                        class="progress-value"
+                                    ></div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-actions">
+
+                                <button
+                                    type="reset"
+                                    id="clearGalleryBtn"
+                                    class="btn btn-secondary"
+                                >
+                                    Clear
+                                </button>
+
+                                <button
+                                    id="saveGalleryBtn"
+                                    type="submit"
+                                    class="btn btn-primary"
+                                >
+                                    Upload & Save Photo
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+                <!-- GALLERY ITEMS -->
+
+                <div
+                    class="card"
+                    style="margin-top:20px;"
+                >
+
+                    <div class="card-head">
+
+                        <div>
+
+                            <h2>
+                                Gallery Items
+                            </h2>
+
+                            <p>
+                                Existing photographs stored in Firebase.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="toolbar">
+
+                            <div class="toolbar-left">
+
+                                <select
+                                    id="galleryFilter"
+                                >
+
+                                    <option value="all">
+                                        All Photos
+                                    </option>
+
+                                    <option value="horizontal">
+                                        Horizontal
+                                    </option>
+
+                                    <option value="vertical">
+                                        Vertical
+                                    </option>
+
+                                    <option value="active">
+                                        Active
+                                    </option>
+
+                                    <option value="inactive">
+                                        Inactive
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="toolbar-right">
+
+                                <button
+                                    id="refreshGalleryBtn"
+                                    class="btn btn-secondary btn-small"
+                                    type="button"
+                                >
+                                    Refresh
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="galleryList"
+                            class="gallery-grid"
+                        >
+
+                            <div class="loading">
+
+                                <div class="spinner"></div>
+
+                                Loading gallery...
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 VIDEO GALLERY
+            ================================================= -->
+
+            <section
+                id="page-videos"
+                class="page"
+            >
+
+                <div class="page-head">
+
+                    <div>
+
+                        <h1>
+                            Video Gallery
+                        </h1>
+
+                        <p>
+                            Manage horizontal clinic videos.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notice info">
+
+                    Videos are stored in the same
+                    <strong>gallery</strong> Firestore collection
+                    using <strong>type = video</strong>.
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-head">
+
+                        <div>
+
+                            <h2>
+                                Add Video
+                            </h2>
+
+                            <p>
+                                Add a public video URL.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <form id="videoForm">
+
+                            <div class="form-grid">
+
+                                <div class="form-group full">
+
+                                    <label>
+                                        Video URL
+                                    </label>
+
+                                    <input
+                                        id="videoUrl"
+                                        type="url"
+                                        placeholder="https://..."
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Video Title
+                                    </label>
+
+                                    <input
+                                        id="videoTitle"
+                                        type="text"
+                                        maxlength="120"
+                                        placeholder="Example: Dental Check-up"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Display Order
+                                    </label>
+
+                                    <input
+                                        id="videoOrder"
+                                        type="number"
+                                        min="1"
+                                        value="1"
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group full">
+
+                                    <label>
+                                        Caption
+                                    </label>
+
+                                    <textarea
+                                        id="videoCaption"
+                                        maxlength="220"
+                                        placeholder="Short video description"
+                                    ></textarea>
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Status
+                                    </label>
+
+                                    <select
+                                        id="videoActive"
+                                    >
+
+                                        <option value="true">
+                                            Active
+                                        </option>
+
+                                        <option value="false">
+                                            Inactive
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-actions">
+
+                                <button
+                                    type="reset"
+                                    class="btn btn-secondary"
+                                >
+                                    Clear
+                                </button>
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary"
+                                >
+                                    Save Video
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="card"
+                    style="margin-top:20px;"
+                >
+
+                    <div class="card-head">
+
+                        <div>
+
+                            <h2>
+                                Existing Videos
+                            </h2>
+
+                            <p>
+                                Video items stored in Firestore.
+                            </p>
+
+                        </div>
+
+                        <button
+                            id="refreshVideosBtn"
+                            class="btn btn-secondary btn-small"
+                            type="button"
+                        >
+                            Refresh
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="videoList"
+                        class="gallery-grid card-body"
+                    >
+
+                        <div class="loading">
+
+                            <div class="spinner"></div>
+
+                            Loading videos...
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PATIENT INQUIRIES
+            ================================================= -->
+
+            <section
+                id="page-inquiries"
+                class="page"
+            >
+
+                <div class="page-head">
+
+                    <div>
+
+                        <h1>
+                            Patient Inquiries
+                        </h1>
+
+                        <p>
+                            Review messages submitted from the website.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        id="refreshInquiriesBtn"
+                        class="btn btn-secondary"
+                        type="button"
+                    >
+                        Refresh
+                    </button>
+
+                </div>
+
+
+                <div class="notice warning">
+
+                    Patient inquiries contain personal information.
+                    Firestore rules should allow only authorized
+                    administrators to read these records.
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-body table-wrap">
+
+                        <div
+                            id="inquiryTableContainer"
+                        >
+
+                            <div class="loading">
+
+                                <div class="spinner"></div>
+
+                                Loading inquiries...
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     EDIT MODAL
+===================================================== -->
+
+<div
+    id="editModal"
+    class="modal-backdrop"
+>
+
+    <div class="modal">
+
+        <div class="modal-head">
+
+            <h2>
+                Edit Gallery Item
+            </h2>
+
+            <button
+                id="closeEditModal"
+                class="modal-close"
+                type="button"
+            >
+                &times;
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <form id="editForm">
+
+                <input
+                    id="editId"
+                    type="hidden"
+                >
+
+
+                <div class="form-grid">
+
+                    <div class="form-group full">
+
+                        <label>
+                            Media URL
+                        </label>
+
+                        <input
+                            id="editUrl"
+                            type="url"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Title
+                        </label>
+
+                        <input
+                            id="editTitle"
+                            type="text"
+                            maxlength="120"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Display Order
+                        </label>
+
+                        <input
+                            id="editOrder"
+                            type="number"
+                            min="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Caption
+                        </label>
+
+                        <textarea
+                            id="editCaption"
+                            maxlength="220"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Orientation
+                        </label>
+
+                        <select id="editOrientation">
+
+                            <option value="horizontal">
+                                Horizontal
+                            </option>
+
+                            <option value="vertical">
+                                Vertical
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select id="editActive">
+
+                            <option value="true">
+                                Active
+                            </option>
+
+                            <option value="false">
+                                Inactive
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        id="cancelEdit"
+                        type="button"
+                        class="btn btn-secondary"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    role="status"
+    aria-live="polite"
+></div>
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script type="module">
+
+    import {
+        initializeApp
+    } from
+    "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+    import {
+        getAuth,
+        GoogleAuthProvider,
+        signInWithPopup,
+        onAuthStateChanged,
+        signOut
+    } from
+    "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+    import {
+        getFirestore,
+        collection,
+        getDocs,
+        addDoc,
+        updateDoc,
+        deleteDoc,
+        doc,
+        serverTimestamp
+    } from
+    "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+    /* =====================================================
+       FIREBASE CONFIG
+    ===================================================== */
+
+    const firebaseConfig = {
+
+        apiKey:
+            "AIzaSyCjquLw6x8dAlqqs92v9T4GVe4AgysJ2Us",
+
+        authDomain:
+            "gajuridental.firebaseapp.com",
+
+        projectId:
+            "gajuridental",
+
+        storageBucket:
+            "gajuridental.firebasestorage.app",
+
+        messagingSenderId:
+            "1037808608519",
+
+        appId:
+            "1:1037808608519:web:32d4190b50bd08959251a2",
+
+        measurementId:
+            "G-FFNNX45D5V"
+
+    };
+
+
+    const app =
+        initializeApp(
+            firebaseConfig
+        );
+
+
+    const auth =
+        getAuth(app);
+
+
+    const db =
+        getFirestore(app);
+
+
+    const provider =
+        new GoogleAuthProvider();
+
+
+    /* =====================================================
+       IMGBB
+    ===================================================== */
+
+    const IMGBB_API_KEY =
+        "c077a7dd2031a6ac352c597f8de1d48c";
+
+
+    /* =====================================================
+       AUTHORIZED ADMIN EMAILS
+    ===================================================== */
+
+    const ADMIN_EMAILS = [
+
+        "deelipshrestha90@gmail.com",
+
+        "bishalxtha17@gmail.com"
+
+    ];
+
+
+    /* =====================================================
+       STATE
+    ===================================================== */
+
+    let currentUser = null;
+
+    let galleryItems = [];
+
+    let bannerItems = [];
+
+    let inquiryItems = [];
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const loginScreen =
+        document.getElementById(
+            "loginScreen"
+        );
+
+
+    const adminApp =
+        document.getElementById(
+            "adminApp"
+        );
+
+
+    const googleLoginBtn =
+        document.getElementById(
+            "googleLoginBtn"
+        );
+
+
+    const loginMessage =
+        document.getElementById(
+            "loginMessage"
+        );
+
+
+    const logoutBtn =
+        document.getElementById(
+            "logoutBtn"
+        );
+
+
+    const userName =
+        document.getElementById(
+            "userName"
+        );
+
+
+    const userEmail =
+        document.getElementById(
+            "userEmail"
+        );
+
+
+    const userPhoto =
+        document.getElementById(
+            "userPhoto"
+        );
+
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    const mobileMenuBtn =
+        document.getElementById(
+            "mobileMenuBtn"
+        );
+
+
+    /* =====================================================
+       ADMIN CHECK
+    ===================================================== */
+
+    function isAdmin(user) {
+
+        if (
+            !user ||
+            !user.email
+        ) {
+
+            return false;
+
+        }
+
+
+        return ADMIN_EMAILS
+            .map(
+                email =>
+                    email.toLowerCase()
+            )
+            .includes(
+                user.email.toLowerCase()
+            );
+
+    }
+
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    function showToast(
+        message,
+        type = "success"
+    ) {
+
+        toast.textContent =
+            message;
+
+        toast.className = "";
+
+        toast.classList.add(
+            "show",
+            type
+        );
+
+
+        clearTimeout(
+            window.toastTimer
+        );
+
+
+        window.toastTimer =
+            setTimeout(
+                () => {
+
+                    toast.classList.remove(
+                        "show"
+                    );
+
+                },
+                3500
+            );
+
+    }
+
+
+    /* =====================================================
+       LOGIN MESSAGE
+    ===================================================== */
+
+    function setLoginMessage(
+        message,
+        type = ""
+    ) {
+
+        loginMessage.textContent =
+            message;
+
+        loginMessage.className =
+            "login-message " + type;
+
+    }
+
+
+    /* =====================================================
+       DATE
+    ===================================================== */
+
+    function formatDate(
+        timestamp
+    ) {
+
+        if (!timestamp) {
+            return "—";
+        }
+
+
+        try {
+
+            return timestamp
+                .toDate()
+                .toLocaleString(
+                    "en-NP",
+                    {
+                        dateStyle: "medium",
+                        timeStyle: "short"
+                    }
+                );
+
+        } catch {
+
+            return "—";
+
+        }
+
+    }
+
+
+    /* =====================================================
+       GOOGLE LOGIN
+    ===================================================== */
+
+    googleLoginBtn.addEventListener(
+        "click",
+        async () => {
+
+            setLoginMessage(
+                "Signing in..."
+            );
+
+
+            googleLoginBtn.disabled =
+                true;
+
+
+            try {
+
+                await signInWithPopup(
+                    auth,
+                    provider
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Login error:",
+                    error
+                );
+
+
+                setLoginMessage(
+                    "Google sign-in failed. Please try again.",
+                    "error"
+                );
+
+
+                googleLoginBtn.disabled =
+                    false;
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    logoutBtn.addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                await signOut(
+                    auth
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                showToast(
+                    "Logout failed.",
+                    "error"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       AUTH STATE
+    ===================================================== */
+
+    onAuthStateChanged(
+        auth,
+        async user => {
+
+            if (!user) {
+
+                currentUser = null;
+
+                loginScreen.style.display =
+                    "flex";
+
+                adminApp.style.display =
+                    "none";
+
+                googleLoginBtn.disabled =
+                    false;
+
+                return;
+
+            }
+
+
+            if (!isAdmin(user)) {
+
+                setLoginMessage(
+                    "This Google account is not authorized for the admin panel.",
+                    "error"
+                );
+
+
+                try {
+
+                    await signOut(
+                        auth
+                    );
+
+                } catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+                }
+
+
+                return;
+
+            }
+
+
+            currentUser =
+                user;
+
+
+            loginScreen.style.display =
+                "none";
+
+
+            adminApp.style.display =
+                "block";
+
+
+            userName.textContent =
+                user.displayName ||
+                "Administrator";
+
+
+            userEmail.textContent =
+                user.email ||
+                "—";
+
+
+            if (user.photoURL) {
+
+                userPhoto.src =
+                    user.photoURL;
+
+            } else {
+
+                userPhoto.style.display =
+                    "none";
+
+            }
+
+
+            await loadAllData();
+
+        }
+    );
+
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            ".side-btn[data-page]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        openPage(
+                            button.dataset.page
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    document
+        .querySelectorAll(
+            ".quick-btn[data-page-target]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        openPage(
+                            button.dataset.pageTarget
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    function openPage(
+        pageName
+    ) {
+
+        document
+            .querySelectorAll(
+                ".page"
+            )
+            .forEach(
+                page => {
+
+                    page.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+        const target =
+            document.getElementById(
+                "page-" + pageName
+            );
+
+
+        if (target) {
+
+            target.classList.add(
+                "active"
+            );
+
+        }
+
+
+        document
+            .querySelectorAll(
+                ".side-btn[data-page]"
+            )
+            .forEach(
+                button => {
+
+                    button.classList.toggle(
+                        "active",
+                        button.dataset.page ===
+                        pageName
+                    );
+
+                }
+            );
+
+
+        sidebar.classList.remove(
+            "open"
+        );
+
+    }
+
+
+    mobileMenuBtn.addEventListener(
+        "click",
+        () => {
+
+            sidebar.classList.toggle(
+                "open"
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       LOAD ALL
+    ===================================================== */
+
+    async function loadAllData() {
+
+        await Promise.allSettled([
+
+            loadGallery(),
+
+            loadBanners(),
+
+            loadInquiries()
+
+        ]);
+
+
+        updateStats();
+
+    }
+
+
+    /* =====================================================
+       IMGBB UPLOAD
+    ===================================================== */
+
+    async function uploadToImgBB(
+        file
+    ) {
+
+        if (!file) {
+
+            throw new Error(
+                "Please select an image."
+            );
+
+        }
+
+
+        if (
+            !file.type.startsWith(
+                "image/"
+            )
+        ) {
+
+            throw new Error(
+                "Selected file is not an image."
+            );
+
+        }
+
+
+        if (
+            file.size >
+            10 * 1024 * 1024
+        ) {
+
+            throw new Error(
+                "Image is too large. Maximum size is 10 MB."
+            );
+
+        }
+
+
+        const formData =
+            new FormData();
+
+
+        formData.append(
+            "key",
+            IMGBB_API_KEY
+        );
+
+
+        formData.append(
+            "image",
+            file
+        );
+
+
+        const response =
+            await fetch(
+                "https://api.imgbb.com/1/upload",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "ImgBB upload request failed."
+            );
+
+        }
+
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "ImgBB:",
+            result
+        );
+
+
+        if (
+            !result.success ||
+            !result.data ||
+            !result.data.url
+        ) {
+
+            throw new Error(
+                result.error?.message ||
+                "ImgBB upload failed."
+            );
+
+        }
+
+
+        return result.data.url;
+
+    }
+
+
+    /* =====================================================
+       IMAGE PREVIEW
+    ===================================================== */
+
+    document
+        .getElementById(
+            "galleryFile"
+        )
+        .addEventListener(
+            "change",
+            event => {
+
+                const file =
+                    event.target.files[0];
+
+
+                const preview =
+                    document.getElementById(
+                        "galleryPreview"
+                    );
+
+
+                const image =
+                    document.getElementById(
+                        "galleryPreviewImage"
+                    );
+
+
+                const info =
+                    document.getElementById(
+                        "galleryPreviewInfo"
+                    );
+
+
+                if (!file) {
+
+                    preview.classList.remove(
+                        "show"
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    !file.type.startsWith(
+                        "image/"
+                    )
+                ) {
+
+                    showToast(
+                        "Please select an image file.",
+                        "error"
+                    );
+
+                    event.target.value =
+                        "";
+
+                    return;
+
+                }
+
+
+                if (
+                    file.size >
+                    10 * 1024 * 1024
+                ) {
+
+                    showToast(
+                        "Image must be smaller than 10 MB.",
+                        "error"
+                    );
+
+                    event.target.value =
+                        "";
+
+                    return;
+
+                }
+
+
+                const objectUrl =
+                    URL.createObjectURL(
+                        file
+                    );
+
+
+                image.src =
+                    objectUrl;
+
+
+                info.textContent =
+                    file.name +
+                    " · " +
+                    Math.round(
+                        file.size / 1024
+                    ) +
+                    " KB";
+
+
+                preview.classList.add(
+                    "show"
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       SAVE PHOTO
+    ===================================================== */
+
+    document
+        .getElementById(
+            "galleryForm"
+        )
+        .addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                if (
+                    !currentUser ||
+                    !isAdmin(currentUser)
+                ) {
+
+                    showToast(
+                        "You are not authorized.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                const file =
+                    document
+                        .getElementById(
+                            "galleryFile"
+                        )
+                        .files[0];
+
+
+                const title =
+                    document
+                        .getElementById(
+                            "galleryTitle"
+                        )
+                        .value
+                        .trim();
+
+
+                const caption =
+                    document
+                        .getElementById(
+                            "galleryCaption"
+                        )
+                        .value
+                        .trim();
+
+
+                const orientation =
+                    document
+                        .getElementById(
+                            "galleryOrientation"
+                        )
+                        .value;
+
+
+                const order =
+                    Number(
+                        document
+                            .getElementById(
+                                "galleryOrder"
+                            )
+                            .value
+                    ) || 1;
+
+
+                const active =
+                    document
+                        .getElementById(
+                            "galleryActive"
+                        )
+                        .value ===
+                    "true";
+
+
+                if (!file) {
+
+                    showToast(
+                        "Please select an image.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                if (!title) {
+
+                    showToast(
+                        "Please enter a photo title.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                const button =
+                    document.getElementById(
+                        "saveGalleryBtn"
+                    );
+
+
+                const status =
+                    document.getElementById(
+                        "uploadStatus"
+                    );
+
+
+                const statusText =
+                    document.getElementById(
+                        "uploadStatusText"
+                    );
+
+
+                const progress =
+                    document.getElementById(
+                        "progressValue"
+                    );
+
+
+                button.disabled =
+                    true;
+
+
+                button.textContent =
+                    "Uploading...";
+
+
+                status.classList.add(
+                    "show"
+                );
+
+
+                statusText.textContent =
+                    "Uploading image to ImgBB...";
+
+
+                progress.style.width =
+                    "35%";
+
+
+                try {
+
+                    /* -----------------------------------------
+                       STEP 1: IMGBB
+                    ----------------------------------------- */
+
+                    const imageUrl =
+                        await uploadToImgBB(
+                            file
+                        );
+
+
+                    progress.style.width =
+                        "70%";
+
+
+                    statusText.textContent =
+                        "Image uploaded. Saving information to Firebase...";
+
+
+                    document.getElementById(
+                        "galleryImageUrl"
+                    ).value =
+                        imageUrl;
+
+
+                    /* -----------------------------------------
+                       STEP 2: FIRESTORE
+                    ----------------------------------------- */
+
+                    await addDoc(
+                        collection(
+                            db,
+                            "gallery"
+                        ),
+                        {
+
+                            type:
+                                "photo",
+
+                            imageUrl:
+                                imageUrl,
+
+                            title:
+                                title,
+
+                            caption:
+                                caption,
+
+                            orientation:
+                                orientation,
+
+                            order:
+                                order,
+
+                            active:
+                                active,
+
+                            createdAt:
+                                serverTimestamp(),
+
+                            createdBy:
+                                currentUser.email
+
+                        }
+                    );
+
+
+                    progress.style.width =
+                        "100%";
+
+
+                    statusText.textContent =
+                        "Photo uploaded and saved successfully.";
+
+
+                    showToast(
+                        "Photo uploaded successfully.",
+                        "success"
+                    );
+
+
+                    /* -----------------------------------------
+                       RESET
+                    ----------------------------------------- */
+
+                    document
+                        .getElementById(
+                            "galleryForm"
+                        )
+                        .reset();
+
+
+                    document
+                        .getElementById(
+                            "galleryPreview"
+                        )
+                        .classList.remove(
+                            "show"
+                        );
+
+
+                    document
+                        .getElementById(
+                            "galleryImageUrl"
+                        )
+                        .value =
+                        "";
+
+
+                    setTimeout(
+                        () => {
+
+                            status.classList.remove(
+                                "show"
+                            );
+
+                            progress.style.width =
+                                "0%";
+
+                        },
+                        1500
+                    );
+
+
+                    await loadGallery();
+
+                } catch (error) {
+
+                    console.error(
+                        "PHOTO UPLOAD ERROR:",
+                        error
+                    );
+
+
+                    statusText.textContent =
+                        error.message ||
+                        "Photo upload failed.";
+
+
+                    progress.style.width =
+                        "0%";
+
+
+                    showToast(
+                        error.message ||
+                        "Photo upload failed.",
+                        "error"
+                    );
+
+                } finally {
+
+                    button.disabled =
+                        false;
+
+
+                    button.textContent =
+                        "Upload & Save Photo";
+
+                }
+
+            }
+        );
+
+
+    /* =====================================================
+       CLEAR PHOTO FORM
+    ===================================================== */
+
+    document
+        .getElementById(
+            "clearGalleryBtn"
+        )
+        .addEventListener(
+            "click",
+            () => {
+
+                document
+                    .getElementById(
+                        "galleryPreview"
+                    )
+                    .classList.remove(
+                        "show"
+                    );
+
+
+                document
+                    .getElementById(
+                        "galleryImageUrl"
+                    )
+                    .value =
+                    "";
+
+
+                document
+                    .getElementById(
+                        "uploadStatus"
+                    )
+                    .classList.remove(
+                        "show"
+                    );
+
+            }
+        );
+
+
+    /* =====================================================
+       LOAD GALLERY
+    ===================================================== */
+
+    async function loadGallery() {
+
+        const container =
+            document.getElementById(
+                "galleryList"
+            );
+
+
+        const videoContainer =
+            document.getElementById(
+                "videoList"
+            );
+
+
+        container.innerHTML = `
+            <div class="loading">
+                <div class="spinner"></div>
+                Loading gallery...
+            </div>
+        `;
+
+
+        try {
+
+            const snapshot =
+                await getDocs(
+                    collection(
+                        db,
+                        "gallery"
+                    )
+                );
+
+
+            galleryItems = [];
+
+
+            snapshot.forEach(
+                item => {
+
+                    galleryItems.push({
+
+                        id:
+                            item.id,
+
+                        ...item.data()
+
+                    });
+
+                }
+            );
+
+
+            galleryItems.sort(
+                (a, b) =>
+                    Number(
+                        a.order || 9999
+                    ) -
+                    Number(
+                        b.order || 9999
+                    )
+            );
+
+
+            renderGallery();
+
+            renderVideos();
+
+            updateStats();
+
+        } catch (error) {
+
+            console.error(
+                "Gallery load error:",
+                error
+            );
+
+
+            container.innerHTML = `
+                <div class="empty-state">
+                    Unable to load gallery.
+                    Check your Firestore rules and Firebase connection.
+                </div>
+            `;
+
+
+            videoContainer.innerHTML = `
+                <div class="empty-state">
+                    Unable to load videos.
+                </div>
+            `;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       RENDER PHOTO GALLERY
+    ===================================================== */
+
+    function renderGallery() {
+
+        const container =
+            document.getElementById(
+                "galleryList"
+            );
+
+
+        const filter =
+            document.getElementById(
+                "galleryFilter"
+            ).value;
+
+
+        let items =
+            galleryItems.filter(
+                item =>
+                    item.type !==
+                    "video"
+            );
+
+
+        if (
+            filter ===
+            "horizontal"
+        ) {
+
+            items =
+                items.filter(
+                    item =>
+                        item.orientation ===
+                        "horizontal"
+                );
+
+        }
+
+
+        if (
+            filter ===
+            "vertical"
+        ) {
+
+            items =
+                items.filter(
+                    item =>
+                        item.orientation ===
+                        "vertical"
+                );
+
+        }
+
+
+        if (
+            filter ===
+            "active"
+        ) {
+
+            items =
+                items.filter(
+                    item =>
+                        item.active ===
+                        true
+                );
+
+        }
+
+
+        if (
+            filter ===
+            "inactive"
+        ) {
+
+            items =
+                items.filter(
+                    item =>
+                        item.active !==
+                        true
+                );
+
+        }
+
+
+        container.innerHTML =
+            "";
+
+
+        if (!items.length) {
+
+            const empty =
+                document.createElement(
+                    "div"
+                );
+
+            empty.className =
+                "empty-state";
+
+            empty.textContent =
+                "No gallery items found.";
+
+            container.appendChild(
+                empty
+            );
+
+            return;
+
+        }
+
+
+        items.forEach(
+            item => {
+
+                container.appendChild(
+                    createPhotoCard(
+                        item
+                    )
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       PHOTO CARD
+    ===================================================== */
+
+    function createPhotoCard(
+        item
+    ) {
+
+        const article =
+            document.createElement(
+                "article"
+            );
+
+
+        article.className =
+            "gallery-item";
+
+
+        const media =
+            document.createElement(
+                "div"
+            );
+
+
+        media.className =
+            "gallery-media";
+
+
+        if (
+            item.orientation ===
+            "vertical"
+        ) {
+
+            media.classList.add(
+                "vertical"
+            );
+
+        }
+
+
+        const image =
+            document.createElement(
+                "img"
+            );
+
+
+        image.src =
+            item.imageUrl ||
+            item.url ||
+            "";
+
+
+        image.alt =
+            item.title ||
+            "Gallery photo";
+
+
+        image.loading =
+            "lazy";
+
+
+        image.decoding =
+            "async";
+
+
+        image.onerror =
+            () => {
+
+                image.style.opacity =
+                    ".3";
+
+            };
+
+
+        media.appendChild(
+            image
+        );
+
+
+        const badge =
+            document.createElement(
+                "span"
+            );
+
+
+        badge.className =
+            "status-badge " +
+            (
+                item.active === true
+                    ? "active"
+                    : "inactive"
+            );
+
+
+        badge.textContent =
+            item.active === true
+                ? "Active"
+                : "Inactive";
+
+
+        media.appendChild(
+            badge
+        );
+
+
+        const content =
+            document.createElement(
+                "div"
+            );
+
+
+        content.className =
+            "gallery-content";
+
+
+        const title =
+            document.createElement(
+                "h3"
+            );
+
+
+        title.textContent =
+            item.title ||
+            "Untitled";
+
+
+        const caption =
+            document.createElement(
+                "p"
+            );
+
+
+        caption.textContent =
+            item.caption ||
+            "No caption";
+
+
+        const meta =
+            document.createElement(
+                "div"
+            );
+
+
+        meta.className =
+            "gallery-meta";
+
+
+        const orientation =
+            document.createElement(
+                "span"
+            );
+
+
+        orientation.textContent =
+            item.orientation ||
+            "horizontal";
+
+
+        const order =
+            document.createElement(
+                "span"
+            );
+
+
+        order.textContent =
+            "Order " +
+            (
+                item.order ||
+                "—"
+            );
+
+
+        meta.appendChild(
+            orientation
+        );
+
+
+        meta.appendChild(
+            order
+        );
+
+
+        const actions =
+            document.createElement(
+                "div"
+            );
+
+
+        actions.className =
+            "item-actions";
+
+
+        const editButton =
+            document.createElement(
+                "button"
+            );
+
+
+        editButton.type =
+            "button";
+
+
+        editButton.className =
+            "btn btn-secondary btn-small";
+
+
+        editButton.textContent =
+            "Edit";
+
+
+        editButton.addEventListener(
+            "click",
+            () =>
+                openEditModal(
+                    item
+                )
+        );
+
+
+        const toggleButton =
+            document.createElement(
+                "button"
+            );
+
+
+        toggleButton.type =
+            "button";
+
+
+        toggleButton.className =
+            "btn btn-secondary btn-small";
+
+
+        toggleButton.textContent =
+            item.active === true
+                ? "Disable"
+                : "Activate";
+
+
+        toggleButton.addEventListener(
+            "click",
+            () =>
+                toggleGalleryItem(
+                    item
+                )
+        );
+
+
+        const deleteButton =
+            document.createElement(
+                "button"
+            );
+
+
+        deleteButton.type =
+            "button";
+
+
+        deleteButton.className =
+            "btn btn-danger btn-small";
+
+
+        deleteButton.textContent =
+            "Delete";
+
+
+        deleteButton.addEventListener(
+            "click",
+            () =>
+                deleteGalleryItem(
+                    item
+                )
+        );
+
+
+        actions.appendChild(
+            editButton
+        );
+
+
+        actions.appendChild(
+            toggleButton
+        );
+
+
+        actions.appendChild(
+            deleteButton
+        );
+
+
+        content.appendChild(
+            title
+        );
+
+
+        content.appendChild(
+            caption
+        );
+
+
+        content.appendChild(
+            meta
+        );
+
+
+        content.appendChild(
+            actions
+        );
+
+
+        article.appendChild(
+            media
+        );
+
+
+        article.appendChild(
+            content
+        );
+
+
+        return article;
+
+    }
+
+
+    /* =====================================================
+       FILTER
+    ===================================================== */
+
+    document
+        .getElementById(
+            "galleryFilter"
+        )
+        .addEventListener(
+            "change",
+            renderGallery
+        );
+
+
+    document
+        .getElementById(
+            "refreshGalleryBtn"
+        )
+        .addEventListener(
+            "click",
+            loadGallery
+        );
+
+
+    document
+        .getElementById(
+            "refreshVideosBtn"
+        )
+        .addEventListener(
+            "click",
+            loadGallery
+        );
+
+
+    /* =====================================================
+       TOGGLE GALLERY ITEM
+    ===================================================== */
+
+    async function toggleGalleryItem(
+        item
+    ) {
+
+        try {
+
+            await updateDoc(
+                doc(
+                    db,
+                    "gallery",
+                    item.id
+                ),
+                {
+
+                    active:
+                        item.active !==
+                        true
+
+                }
+            );
+
+
+            showToast(
+                item.active === true
+                    ? "Photo disabled."
+                    : "Photo activated."
+            );
+
+
+            await loadGallery();
+
+        } catch (error) {
+
+            console.error(
+                error
+            );
+
+
+            showToast(
+                "Could not update photo.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       DELETE GALLERY ITEM
+    ===================================================== */
+
+    async function deleteGalleryItem(
+        item
+    ) {
+
+        const confirmed =
+            window.confirm(
+                "Delete this gallery item?"
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        try {
+
+            await deleteDoc(
+                doc(
+                    db,
+                    "gallery",
+                    item.id
+                )
+            );
+
+
+            showToast(
+                "Gallery item deleted."
+            );
+
+
+            await loadGallery();
+
+        } catch (error) {
+
+            console.error(
+                error
+            );
+
+
+            showToast(
+                "Could not delete item.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       EDIT MODAL
+    ===================================================== */
+
+    const editModal =
+        document.getElementById(
+            "editModal"
+        );
+
+
+    function openEditModal(
+        item
+    ) {
+
+        document.getElementById(
+            "editId"
+        ).value =
+            item.id;
+
+
+        document.getElementById(
+            "editUrl"
+        ).value =
+            item.imageUrl ||
+            item.videoUrl ||
+            item.url ||
+            "";
+
+
+        document.getElementById(
+            "editTitle"
+        ).value =
+            item.title ||
+            "";
+
+
+        document.getElementById(
+            "editOrder"
+        ).value =
+            item.order ||
+            1;
+
+
+        document.getElementById(
+            "editCaption"
+        ).value =
+            item.caption ||
+            "";
+
+
+        document.getElementById(
+            "editOrientation"
+        ).value =
+            item.orientation ||
+            "horizontal";
+
+
+        document.getElementById(
+            "editActive"
+        ).value =
+            item.active === true
+                ? "true"
+                : "false";
+
+
+        editModal.classList.add(
+            "show"
+        );
+
+    }
+
+
+    function closeEditModal() {
+
+        editModal.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    document
+        .getElementById(
+            "closeEditModal"
+        )
+        .addEventListener(
+            "click",
+            closeEditModal
+        );
+
+
+    document
+        .getElementById(
+            "cancelEdit"
+        )
+        .addEventListener(
+            "click",
+            closeEditModal
+        );
+
+
+    editModal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                editModal
+            ) {
+
+                closeEditModal();
+
+            }
+
+        }
+    );
+
+
+    document
+        .getElementById(
+            "editForm"
+        )
+        .addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                const id =
+                    document.getElementById(
+                        "editId"
+                    ).value;
+
+
+                if (!id) {
+                    return;
+                }
+
+
+                try {
+
+                    await updateDoc(
+                        doc(
+                            db,
+                            "gallery",
+                            id
+                        ),
+                        {
+
+                            imageUrl:
+                                document
+                                    .getElementById(
+                                        "editUrl"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            title:
+                                document
+                                    .getElementById(
+                                        "editTitle"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            caption:
+                                document
+                                    .getElementById(
+                                        "editCaption"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            orientation:
+                                document
+                                    .getElementById(
+                                        "editOrientation"
+                                    )
+                                    .value,
+
+                            order:
+                                Number(
+                                    document
+                                        .getElementById(
+                                            "editOrder"
+                                        )
+                                        .value
+                                ) || 1,
+
+                            active:
+                                document
+                                    .getElementById(
+                                        "editActive"
+                                    )
+                                    .value ===
+                                "true",
+
+                            updatedAt:
+                                serverTimestamp(),
+
+                            updatedBy:
+                                currentUser.email
+
+                        }
+                    );
+
+
+                    closeEditModal();
+
+
+                    showToast(
+                        "Changes saved."
+                    );
+
+
+                    await loadGallery();
+
+                } catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+
+                    showToast(
+                        "Could not save changes.",
+                        "error"
+                    );
+
+                }
+
+            }
+        );
+
+
+    /* =====================================================
+       BANNERS
+    ===================================================== */
+
+    async function loadBanners() {
+
+        const container =
+            document.getElementById(
+                "bannerList"
+            );
+
+
+        container.innerHTML = `
+            <div class="loading">
+                <div class="spinner"></div>
+                Loading banners...
+            </div>
+        `;
+
+
+        try {
+
+            const snapshot =
+                await getDocs(
+                    collection(
+                        db,
+                        "banners"
+                    )
+                );
+
+
+            bannerItems = [];
+
+
+            snapshot.forEach(
+                item => {
+
+                    bannerItems.push({
+
+                        id:
+                            item.id,
+
+                        ...item.data()
+
+                    });
+
+                }
+            );
+
+
+            bannerItems.sort(
+                (a, b) =>
+                    Number(
+                        a.order || 9999
+                    ) -
+                    Number(
+                        b.order || 9999
+                    )
+            );
+
+
+            renderBanners();
+
+            updateStats();
+
+        } catch (error) {
+
+            console.error(
+                "Banner error:",
+                error
+            );
+
+
+            container.innerHTML = `
+                <div class="empty-state">
+                    Unable to load banners.
+                </div>
+            `;
+
+        }
+
+    }
+
+
+    function renderBanners() {
+
+        const container =
+            document.getElementById(
+                "bannerList"
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        if (!bannerItems.length) {
+
+            const empty =
+                document.createElement(
+                    "div"
+                );
+
+
+            empty.className =
+                "empty-state";
+
+
+            empty.textContent =
+                "No banners have been added yet.";
+
+
+            container.appendChild(
+                empty
+            );
+
+
+            return;
+
+        }
+
+
+        bannerItems.forEach(
+            item => {
+
+                const row =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                row.className =
+                    "banner-row";
+
+
+                const image =
+                    document.createElement(
+                        "img"
+                    );
+
+
+                image.className =
+                    "banner-image";
+
+
+                image.src =
+                    item.imageUrl ||
+                    "";
+
+
+                image.alt =
+                    item.title ||
+                    "Banner";
+
+
+                image.loading =
+                    "lazy";
+
+
+                const info =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                info.className =
+                    "banner-info";
+
+
+                const title =
+                    document.createElement(
+                        "strong"
+                    );
+
+
+                title.textContent =
+                    item.title ||
+                    "Untitled banner";
+
+
+                const subtitle =
+                    document.createElement(
+                        "p"
+                    );
+
+
+                subtitle.textContent =
+                    item.subtitle ||
+                    "No subtitle";
+
+
+                const meta =
+                    document.createElement(
+                        "small"
+                    );
+
+
+                meta.className =
+                    "banner-meta " +
+                    (
+                        item.active === true
+                            ? "active"
+                            : "inactive"
+                    );
+
+
+                meta.textContent =
+                    "Order " +
+                    (
+                        item.order ||
+                        "—"
+                    ) +
+                    " · " +
+                    (
+                        item.active === true
+                            ? "Active"
+                            : "Inactive"
+                    );
+
+
+                info.appendChild(
+                    title
+                );
+
+
+                info.appendChild(
+                    subtitle
+                );
+
+
+                info.appendChild(
+                    meta
+                );
+
+
+                const actions =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                actions.className =
+                    "banner-actions";
+
+
+                const toggle =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                toggle.type =
+                    "button";
+
+
+                toggle.className =
+                    "btn btn-secondary btn-small";
+
+
+                toggle.textContent =
+                    item.active === true
+                        ? "Disable"
+                        : "Activate";
+
+
+                toggle.addEventListener(
+                    "click",
+                    async () => {
+
+                        try {
+
+                            await updateDoc(
+                                doc(
+                                    db,
+                                    "banners",
+                                    item.id
+                                ),
+                                {
+
+                                    active:
+                                        item.active !==
+                                        true
+
+                                }
+                            );
+
+
+                            showToast(
+                                "Banner status updated."
+                            );
+
+
+                            await loadBanners();
+
+                        } catch (error) {
+
+                            console.error(
+                                error
+                            );
+
+
+                            showToast(
+                                "Could not update banner.",
+                                "error"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                const remove =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                remove.type =
+                    "button";
+
+
+                remove.className =
+                    "btn btn-danger btn-small";
+
+
+                remove.textContent =
+                    "Delete";
+
+
+                remove.addEventListener(
+                    "click",
+                    async () => {
+
+                        if (
+                            !window.confirm(
+                                "Delete this banner?"
+                            )
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        try {
+
+                            await deleteDoc(
+                                doc(
+                                    db,
+                                    "banners",
+                                    item.id
+                                )
+                            );
+
+
+                            showToast(
+                                "Banner deleted."
+                            );
+
+
+                            await loadBanners();
+
+                        } catch (error) {
+
+                            console.error(
+                                error
+                            );
+
+
+                            showToast(
+                                "Could not delete banner.",
+                                "error"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                actions.appendChild(
+                    toggle
+                );
+
+
+                actions.appendChild(
+                    remove
+                );
+
+
+                row.appendChild(
+                    image
+                );
+
+
+                row.appendChild(
+                    info
+                );
+
+
+                row.appendChild(
+                    actions
+                );
+
+
+                container.appendChild(
+                    row
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       SAVE BANNER
+    ===================================================== */
+
+    document
+        .getElementById(
+            "bannerForm"
+        )
+        .addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                try {
+
+                    await addDoc(
+                        collection(
+                            db,
+                            "banners"
+                        ),
+                        {
+
+                            imageUrl:
+                                document
+                                    .getElementById(
+                                        "bannerImageUrl"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            title:
+                                document
+                                    .getElementById(
+                                        "bannerTitle"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            subtitle:
+                                document
+                                    .getElementById(
+                                        "bannerSubtitle"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            order:
+                                Number(
+                                    document
+                                        .getElementById(
+                                            "bannerOrder"
+                                        )
+                                        .value
+                                ) || 1,
+
+                            active:
+                                document
+                                    .getElementById(
+                                        "bannerActive"
+                                    )
+                                    .value ===
+                                "true",
+
+                            createdAt:
+                                serverTimestamp(),
+
+                            createdBy:
+                                currentUser.email
+
+                        }
+                    );
+
+
+                    showToast(
+                        "Banner saved successfully."
+                    );
+
+
+                    document
+                        .getElementById(
+                            "bannerForm"
+                        )
+                        .reset();
+
+
+                    await loadBanners();
+
+                } catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+
+                    showToast(
+                        "Could not save banner.",
+                        "error"
+                    );
+
+                }
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "refreshBannersBtn"
+        )
+        .addEventListener(
+            "click",
+            loadBanners
+        );
+
+
+    /* =====================================================
+       VIDEO FORM
+    ===================================================== */
+
+    document
+        .getElementById(
+            "videoForm"
+        )
+        .addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                try {
+
+                    await addDoc(
+                        collection(
+                            db,
+                            "gallery"
+                        ),
+                        {
+
+                            type:
+                                "video",
+
+                            orientation:
+                                "horizontal",
+
+                            videoUrl:
+                                document
+                                    .getElementById(
+                                        "videoUrl"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            title:
+                                document
+                                    .getElementById(
+                                        "videoTitle"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            caption:
+                                document
+                                    .getElementById(
+                                        "videoCaption"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            order:
+                                Number(
+                                    document
+                                        .getElementById(
+                                            "videoOrder"
+                                        )
+                                        .value
+                                ) || 1,
+
+                            active:
+                                document
+                                    .getElementById(
+                                        "videoActive"
+                                    )
+                                    .value ===
+                                "true",
+
+                            createdAt:
+                                serverTimestamp(),
+
+                            createdBy:
+                                currentUser.email
+
+                        }
+                    );
+
+
+                    showToast(
+                        "Video saved successfully."
+                    );
+
+
+                    document
+                        .getElementById(
+                            "videoForm"
+                        )
+                        .reset();
+
+
+                    await loadGallery();
+
+                } catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+
+                    showToast(
+                        "Could not save video.",
+                        "error"
+                    );
+
+                }
+
+            }
+        );
+
+
+    /* =====================================================
+       RENDER VIDEOS
+    ===================================================== */
+
+    function renderVideos() {
+
+        const container =
+            document.getElementById(
+                "videoList"
+            );
+
+
+        const items =
+            galleryItems.filter(
+                item =>
+                    item.type ===
+                    "video"
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        if (!items.length) {
+
+            const empty =
+                document.createElement(
+                    "div"
+                );
+
+
+            empty.className =
+                "empty-state";
+
+
+            empty.textContent =
+                "No videos found.";
+
+
+            container.appendChild(
+                empty
+            );
+
+
+            return;
+
+        }
+
+
+        items.forEach(
+            item => {
+
+                const article =
+                    document.createElement(
+                        "article"
+                    );
+
+
+                article.className =
+                    "gallery-item";
+
+
+                const media =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                media.className =
+                    "gallery-media";
+
+
+                const video =
+                    document.createElement(
+                        "video"
+                    );
+
+
+                video.src =
+                    item.videoUrl ||
+                    item.url ||
+                    "";
+
+
+                video.controls =
+                    true;
+
+
+                video.playsInline =
+                    true;
+
+
+                video.preload =
+                    "metadata";
+
+
+                media.appendChild(
+                    video
+                );
+
+
+                const badge =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                badge.className =
+                    "status-badge " +
+                    (
+                        item.active === true
+                            ? "active"
+                            : "inactive"
+                    );
+
+
+                badge.textContent =
+                    item.active === true
+                        ? "Active"
+                        : "Inactive";
+
+
+                media.appendChild(
+                    badge
+                );
+
+
+                const content =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                content.className =
+                    "gallery-content";
+
+
+                const title =
+                    document.createElement(
+                        "h3"
+                    );
+
+
+                title.textContent =
+                    item.title ||
+                    "Untitled video";
+
+
+                const caption =
+                    document.createElement(
+                        "p"
+                    );
+
+
+                caption.textContent =
+                    item.caption ||
+                    "No caption";
+
+
+                const meta =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                meta.className =
+                    "gallery-meta";
+
+
+                const type =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                type.textContent =
+                    "Video";
+
+
+                const order =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                order.textContent =
+                    "Order " +
+                    (
+                        item.order ||
+                        "—"
+                    );
+
+
+                meta.appendChild(
+                    type
+                );
+
+
+                meta.appendChild(
+                    order
+                );
+
+
+                const actions =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                actions.className =
+                    "item-actions";
+
+
+                const edit =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                edit.type =
+                    "button";
+
+
+                edit.className =
+                    "btn btn-secondary btn-small";
+
+
+                edit.textContent =
+                    "Edit";
+
+
+                edit.addEventListener(
+                    "click",
+                    () =>
+                        openEditModal(
+                            item
+                        )
+                );
+
+
+                const toggle =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                toggle.type =
+                    "button";
+
+
+                toggle.className =
+                    "btn btn-secondary btn-small";
+
+
+                toggle.textContent =
+                    item.active === true
+                        ? "Disable"
+                        : "Activate";
+
+
+                toggle.addEventListener(
+                    "click",
+                    () =>
+                        toggleGalleryItem(
+                            item
+                        )
+                );
+
+
+                const remove =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                remove.type =
+                    "button";
+
+
+                remove.className =
+                    "btn btn-danger btn-small";
+
+
+                remove.textContent =
+                    "Delete";
+
+
+                remove.addEventListener(
+                    "click",
+                    () =>
+                        deleteGalleryItem(
+                            item
+                        )
+                );
+
+
+                actions.appendChild(
+                    edit
+                );
+
+
+                actions.appendChild(
+                    toggle
+                );
+
+
+                actions.appendChild(
+                    remove
+                );
+
+
+                content.appendChild(
+                    title
+                );
+
+
+                content.appendChild(
+                    caption
+                );
+
+
+                content.appendChild(
+                    meta
+                );
+
+
+                content.appendChild(
+                    actions
+                );
+
+
+                article.appendChild(
+                    media
+                );
+
+
+                article.appendChild(
+                    content
+                );
+
+
+                container.appendChild(
+                    article
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       INQUIRIES
+    ===================================================== */
+
+    async function loadInquiries() {
+
+        const container =
+            document.getElementById(
+                "inquiryTableContainer"
+            );
+
+
+        container.innerHTML = `
+            <div class="loading">
+                <div class="spinner"></div>
+                Loading inquiries...
+            </div>
+        `;
+
+
+        try {
+
+            const snapshot =
+                await getDocs(
+                    collection(
+                        db,
+                        "patientInquiries"
+                    )
+                );
+
+
+            inquiryItems = [];
+
+
+            snapshot.forEach(
+                item => {
+
+                    inquiryItems.push({
+
+                        id:
+                            item.id,
+
+                        ...item.data()
+
+                    });
+
+                }
+            );
+
+
+            inquiryItems.sort(
+                (a, b) => {
+
+                    const aTime =
+                        a.createdAt?.seconds ||
+                        0;
+
+
+                    const bTime =
+                        b.createdAt?.seconds ||
+                        0;
+
+
+                    return bTime -
+                           aTime;
+
+                }
+            );
+
+
+            renderInquiries();
+
+            updateStats();
+
+        } catch (error) {
+
+            console.error(
+                "Inquiry error:",
+                error
+            );
+
+
+            container.innerHTML = `
+                <div class="empty-state">
+                    Unable to load patient inquiries.
+                    Check your Firestore security rules.
+                </div>
+            `;
+
+        }
+
+    }
+
+
+    function renderInquiries() {
+
+        const container =
+            document.getElementById(
+                "inquiryTableContainer"
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        if (!inquiryItems.length) {
+
+            const empty =
+                document.createElement(
+                    "div"
+                );
+
+
+            empty.className =
+                "empty-state";
+
+
+            empty.textContent =
+                "No patient inquiries found.";
+
+
+            container.appendChild(
+                empty
+            );
+
+
+            return;
+
+        }
+
+
+        const table =
+            document.createElement(
+                "table"
+            );
+
+
+        const thead =
+            document.createElement(
+                "thead"
+            );
+
+
+        const header =
+            document.createElement(
+                "tr"
+            );
+
+
+        [
+            "Patient",
+            "Phone",
+            "Email",
+            "Message",
+            "Submitted"
+        ].forEach(
+            text => {
+
+                const th =
+                    document.createElement(
+                        "th"
+                    );
+
+
+                th.textContent =
+                    text;
+
+
+                header.appendChild(
+                    th
+                );
+
+            }
+        );
+
+
+        thead.appendChild(
+            header
+        );
+
+
+        const tbody =
+            document.createElement(
+                "tbody"
+            );
+
+
+        inquiryItems.forEach(
+            item => {
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                const patient =
+                    document.createElement(
+                        "td"
+                    );
+
+
+                patient.textContent =
+                    item.patientName ||
+                    "—";
+
+
+                const phone =
+                    document.createElement(
+                        "td"
+                    );
+
+
+                phone.textContent =
+                    item.phone ||
+                    "—";
+
+
+                const email =
+                    document.createElement(
+                        "td"
+                    );
+
+
+                email.textContent =
+                    item.email ||
+                    "—";
+
+
+                const message =
+                    document.createElement(
+                        "td"
+                    );
+
+
+                message.textContent =
+                    item.comment ||
+                    "—";
+
+
+                const date =
+                    document.createElement(
+                        "td"
+                    );
+
+
+                date.textContent =
+                    formatDate(
+                        item.createdAt
+                    );
+
+
+                row.appendChild(
+                    patient
+                );
+
+
+                row.appendChild(
+                    phone
+                );
+
+
+                row.appendChild(
+                    email
+                );
+
+
+                row.appendChild(
+                    message
+                );
+
+
+                row.appendChild(
+                    date
+                );
+
+
+                tbody.appendChild(
+                    row
+                );
+
+            }
+        );
+
+
+        table.appendChild(
+            thead
+        );
+
+
+        table.appendChild(
+            tbody
+        );
+
+
+        container.appendChild(
+            table
+        );
+
+    }
+
+
+    document
+        .getElementById(
+            "refreshInquiriesBtn"
+        )
+        .addEventListener(
+            "click",
+            loadInquiries
+        );
+
+
+    /* =====================================================
+       STATS
+    ===================================================== */
+
+    function updateStats() {
+
+        document.getElementById(
+            "statGallery"
+        ).textContent =
+            galleryItems.length;
+
+
+        document.getElementById(
+            "statActive"
+        ).textContent =
+            galleryItems.filter(
+                item =>
+                    item.active === true
+            ).length;
+
+
+        document.getElementById(
+            "statBanners"
+        ).textContent =
+            bannerItems.length;
+
+
+        document.getElementById(
+            "statInquiries"
+        ).textContent =
+            inquiryItems.length;
+
+    }
+
+
+    /* =====================================================
+       ESCAPE KEY
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+                closeEditModal();
+
+                sidebar.classList.remove(
+                    "open"
+                );
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2390 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Gajuri Dental Clinic</title>
+
+    <meta name="description"
+          content="Secure Google login for Gajuri Dental Clinic patients and authorized users in Gajuri, Dhading, Nepal.">
+
+    <meta name="keywords"
+          content="Gajuri Dental Clinic login, dental clinic Gajuri, dentist Dhading, patient login">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical"
+          href="https://gajuridental.com/login.html">
+
+    <meta property="og:title"
+          content="Login | Gajuri Dental Clinic">
+
+    <meta property="og:description"
+          content="Secure login for Gajuri Dental Clinic.">
+
+    <meta property="og:type"
+          content="website">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            color: #1f2937;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .site-header {
+            width: 100%;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            width: min(1440px, 100%);
+            margin: auto;
+            min-height: 76px;
+            padding: 0 28px;
+
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        /* LOGO */
+
+        .brand {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .brand img {
+            width: 145px;
+            height: auto;
+            object-fit: contain;
+        }
+
+
+        /* DESKTOP NAV */
+
+        .desktop-navigation {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+        }
+
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-button {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+
+            padding: 11px 13px;
+
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            border-radius: 7px;
+            transition: background 0.2s ease,
+                        color 0.2s ease;
+        }
+
+        .nav-dropdown-button:hover {
+            background: #f3f4f6;
+            color: #0b63ce;
+        }
+
+        .nav-dropdown-button .arrow {
+            font-size: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-dropdown.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 7px);
+            left: 0;
+
+            min-width: 225px;
+
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 9px;
+
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+
+            padding: 7px;
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-5px);
+
+            transition:
+                opacity 0.18s ease,
+                visibility 0.18s ease,
+                transform 0.18s ease;
+        }
+
+        .nav-dropdown.open .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 9px 11px;
+
+            border-radius: 6px;
+
+            font-size: 13px;
+            color: #374151;
+
+            transition: background 0.2s ease,
+                        color 0.2s ease;
+        }
+
+        .nav-dropdown-menu a:hover {
+            background: #f0f7ff;
+            color: #0b63ce;
+        }
+
+
+        /* ACCOUNT */
+
+        .account-area {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .account-button {
+            border: 1px solid #dbe3ea;
+            background: #ffffff;
+
+            min-width: 110px;
+            padding: 9px 13px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            color: #374151;
+        }
+
+        .account-button:hover {
+            border-color: #0b63ce;
+            color: #0b63ce;
+        }
+
+        .account-button .arrow {
+            font-size: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .account-area.open .account-button .arrow {
+            transform: rotate(180deg);
+        }
+
+        .account-menu {
+            position: absolute;
+
+            top: calc(100% + 8px);
+            right: 0;
+
+            width: 210px;
+
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 9px;
+
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+
+            padding: 7px;
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-5px);
+
+            transition:
+                opacity 0.18s ease,
+                visibility 0.18s ease,
+                transform 0.18s ease;
+        }
+
+        .account-area.open .account-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .account-menu a,
+        .account-menu button {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            border: none;
+            background: transparent;
+
+            padding: 10px;
+
+            border-radius: 6px;
+
+            color: #374151;
+            font-size: 13px;
+
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .account-menu a:hover,
+        .account-menu button:hover {
+            background: #f0f7ff;
+            color: #0b63ce;
+        }
+
+
+        /* MOBILE MENU BUTTON */
+
+        .mobile-menu-button {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid #dbe3ea;
+            background: #ffffff;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 19px;
+            color: #374151;
+        }
+
+
+        /* =========================================================
+           LOGIN SECTION
+        ========================================================= */
+
+        .login-page {
+            min-height: calc(100vh - 76px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 60px 25px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #f8fbff 0%,
+                    #ffffff 65%
+                );
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 470px;
+        }
+
+        .login-card {
+            background: #ffffff;
+
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+
+            padding: 42px 40px;
+
+            box-shadow:
+                0 18px 50px rgba(15, 23, 42, 0.08);
+
+            text-align: center;
+        }
+
+        .login-logo {
+            width: 90px;
+            height: 90px;
+
+            margin: 0 auto 20px;
+
+            object-fit: contain;
+        }
+
+        .login-card h1 {
+            font-size: 29px;
+            line-height: 1.25;
+
+            color: #172033;
+
+            margin-bottom: 10px;
+        }
+
+        .login-card .subtitle {
+            color: #64748b;
+            font-size: 14px;
+
+            max-width: 350px;
+            margin: 0 auto 30px;
+        }
+
+
+        /* GOOGLE BUTTON */
+
+        .google-login-button {
+            width: 100%;
+
+            min-height: 52px;
+
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+
+            background: #ffffff;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            color: #1f2937;
+
+            transition:
+                background 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .google-login-button:hover {
+            background: #f8fafc;
+            border-color: #b8c2cc;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.07);
+        }
+
+        .google-login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .google-icon {
+            font-size: 18px;
+        }
+
+
+        /* STATUS */
+
+        .login-status {
+            min-height: 24px;
+
+            margin-top: 20px;
+
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .login-status.success {
+            color: #15803d;
+        }
+
+        .login-status.error {
+            color: #dc2626;
+        }
+
+
+        /* USER INFORMATION */
+
+        .user-panel {
+            display: none;
+
+            margin-top: 25px;
+
+            border-top: 1px solid #e5e7eb;
+            padding-top: 25px;
+        }
+
+        .user-panel.show {
+            display: block;
+        }
+
+        .user-image {
+            width: 64px;
+            height: 64px;
+
+            border-radius: 50%;
+
+            margin: 0 auto 12px;
+
+            object-fit: cover;
+
+            border: 2px solid #e2e8f0;
+        }
+
+        .user-name {
+            font-size: 17px;
+            font-weight: 700;
+            color: #172033;
+        }
+
+        .user-email {
+            font-size: 13px;
+            color: #64748b;
+
+            margin-top: 3px;
+
+            word-break: break-word;
+        }
+
+        .dashboard-button {
+            display: inline-flex;
+
+            margin-top: 18px;
+
+            padding: 10px 18px;
+
+            background: #0b63ce;
+            color: #ffffff;
+
+            border-radius: 7px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: background 0.2s ease;
+        }
+
+        .dashboard-button:hover {
+            background: #084f9f;
+        }
+
+        .logout-button {
+            display: inline-flex;
+
+            margin-top: 10px;
+
+            padding: 9px 18px;
+
+            background: #ffffff;
+            color: #374151;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 7px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background: #f8fafc;
+        }
+
+
+        /* SECURITY NOTE */
+
+        .security-note {
+            margin-top: 28px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #eef2f7;
+
+            font-size: 12px;
+            color: #64748b;
+
+            line-height: 1.6;
+        }
+
+        .security-note i {
+            margin-right: 5px;
+            color: #0b63ce;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .site-footer {
+            background: #f8fafc;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-container {
+            width: min(1440px, 100%);
+            margin: auto;
+
+            padding: 45px 28px 25px;
+
+            display: grid;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 35px;
+        }
+
+        .footer-column h3 {
+            font-size: 15px;
+            color: #172033;
+
+            margin-bottom: 14px;
+        }
+
+        .footer-column a {
+            display: block;
+
+            font-size: 13px;
+            color: #64748b;
+
+            margin-bottom: 9px;
+
+            transition: color 0.2s ease;
+        }
+
+        .footer-column a:hover {
+            color: #0b63ce;
+        }
+
+        .footer-bottom {
+            width: min(1440px, 100%);
+            margin: auto;
+
+            padding: 18px 28px;
+
+            border-top: 1px solid #e5e7eb;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid #dbe3ea;
+            border-radius: 50%;
+
+            color: #475569;
+
+            transition:
+                color 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: #0b63ce;
+            border-color: #0b63ce;
+            background: #ffffff;
+        }
+
+
+        /* =========================================================
+           MOBILE NAV
+        ========================================================= */
+
+        .mobile-navigation {
+            display: none;
+
+            background: #ffffff;
+
+            border-top: 1px solid #e5e7eb;
+
+            padding: 8px 18px 15px;
+        }
+
+        .mobile-navigation.active {
+            display: block;
+        }
+
+        .mobile-navigation > a,
+        .mobile-nav-dropdown-button {
+            width: 100%;
+
+            min-height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5px;
+
+            border: none;
+            background: transparent;
+
+            color: #374151;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .mobile-nav-dropdown-button .arrow {
+            transition: transform 0.2s ease;
+        }
+
+        .mobile-nav-dropdown.open
+        .mobile-nav-dropdown-button .arrow {
+            transform: rotate(180deg);
+        }
+
+        .mobile-nav-dropdown-menu {
+            display: none;
+
+            padding: 5px 0 8px 15px;
+        }
+
+        .mobile-nav-dropdown.open
+        .mobile-nav-dropdown-menu {
+            display: block;
+        }
+
+        .mobile-nav-dropdown-menu a {
+            display: block;
+
+            padding: 9px 5px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+        .mobile-nav-dropdown-menu a:hover {
+            color: #0b63ce;
+        }
+
+
+        /* =========================================================
+           TABLET
+        ========================================================= */
+
+        @media (max-width: 1100px) {
+
+            .header-container {
+                padding: 0 20px;
+            }
+
+            .desktop-navigation {
+                gap: 0;
+            }
+
+            .nav-dropdown-button {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+
+            .brand img {
+                width: 125px;
+            }
+
+            .account-button {
+                min-width: 95px;
+            }
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 850px) {
+
+            .header-container {
+                min-height: 66px;
+
+                padding:
+                    0 15px;
+
+                justify-content: space-between;
+            }
+
+            .brand img {
+                width: 125px;
+            }
+
+            .desktop-navigation {
+                display: none;
+            }
+
+            .account-area {
+                margin-left: auto;
+                margin-right: 8px;
+            }
+
+            .account-button {
+                min-width: 45px;
+
+                width: 45px;
+                height: 42px;
+
+                padding: 0;
+            }
+
+            .account-button span {
+                display: none;
+            }
+
+            .account-button .arrow {
+                display: none;
+            }
+
+            .mobile-menu-button {
+                display: flex;
+            }
+
+            .login-page {
+                min-height:
+                    calc(100vh - 66px);
+
+                padding:
+                    35px 15px;
+            }
+
+            .login-card {
+                padding:
+                    34px 24px;
+            }
+
+            .footer-container {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                padding:
+                    35px 20px 20px;
+
+                gap: 30px 20px;
+            }
+
+            .footer-bottom {
+                padding:
+                    17px 20px;
+
+                flex-direction: column;
+
+                text-align: center;
+            }
+        }
+
+
+        /* =========================================================
+           SMALL PHONE
+        ========================================================= */
+
+        @media (max-width: 480px) {
+
+            .brand img {
+                width: 112px;
+            }
+
+            .login-page {
+                padding:
+                    25px 12px;
+            }
+
+            .login-card {
+                padding:
+                    30px 18px;
+
+                border-radius: 12px;
+            }
+
+            .login-card h1 {
+                font-size: 25px;
+            }
+
+            .login-card .subtitle {
+                font-size: 13px;
+            }
+
+            .google-login-button {
+                min-height: 50px;
+                font-size: 14px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                padding:
+                    30px 18px 15px;
+            }
+
+            .social-links {
+                gap: 10px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="site-header">
+
+    <div class="header-container">
+
+        <!-- LOGO -->
+        <a href="index.html"
+           class="brand"
+           aria-label="Gajuri Dental Clinic Home">
+
+            <img src="images/logo.png"
+                 alt="Gajuri Dental Clinic Logo"
+                 width="145"
+                 height="60">
+        </a>
+
+
+        <!-- DESKTOP NAVIGATION -->
+
+        <nav class="desktop-navigation"
+             aria-label="Main Navigation">
+
+            <a href="index.html"
+               class="nav-dropdown-button">
+                Home
+            </a>
+
+
+            <!-- DEPARTMENT -->
+
+            <div class="nav-dropdown">
+
+                <button class="nav-dropdown-button"
+                        type="button">
+
+                    Department
+
+                    <i class="fa-solid fa-chevron-down arrow"></i>
+
+                </button>
+
+                <div class="nav-dropdown-menu">
+
+                    <a href="clinical-department.html">
+                        Clinical Department
+                    </a>
+
+                    <a href="clinic-science-department.html">
+                        Clinic Science Department
+                    </a>
+
+                    <a href="health-library.html">
+                        Health Library
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- TREATMENTS -->
+
+            <div class="nav-dropdown">
+
+                <button class="nav-dropdown-button"
+                        type="button">
+
+                    Treatments
+
+                    <i class="fa-solid fa-chevron-down arrow"></i>
+
+                </button>
+
+                <div class="nav-dropdown-menu">
+
+                    <a href="teeth-cleaning.html">
+                        Teeth Cleaning
+                    </a>
+
+                    <a href="root-canal-treatment.html">
+                        Root Canal Treatment
+                    </a>
+
+                    <a href="dental-filling.html">
+                        Dental Filling
+                    </a>
+
+                    <a href="tooth-extraction.html">
+                        Tooth Extraction
+                    </a>
+
+                    <a href="dental-crown.html">
+                        Dental Crown
+                    </a>
+
+                    <a href="dental-bridge.html">
+                        Dental Bridge
+                    </a>
+
+                    <a href="dentures.html">
+                        Dentures
+                    </a>
+
+                    <a href="teeth-whitening.html">
+                        Teeth Whitening
+                    </a>
+
+                    <a href="gum-treatment.html">
+                        Gum Treatment
+                    </a>
+
+                    <a href="dental-implant.html">
+                        Dental Implant
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- KNOWLEDGE -->
+
+            <div class="nav-dropdown">
+
+                <button class="nav-dropdown-button"
+                        type="button">
+
+                    Knowledge
+
+                    <i class="fa-solid fa-chevron-down arrow"></i>
+
+                </button>
+
+                <div class="nav-dropdown-menu">
+
+                    <a href="knowledge.html">
+                        Knowledge
+                    </a>
+
+                    <a href="blog.html">
+                        Blog
+                    </a>
+
+                    <a href="videos.html">
+                        Videos
+                    </a>
+
+                    <a href="research.html">
+                        Research
+                    </a>
+
+                    <a href="notice.html">
+                        Notice
+                    </a>
+
+                    <a href="journal.html">
+                        Journal
+                    </a>
+
+                    <a href="news.html">
+                        News
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- SERVICES -->
+
+            <div class="nav-dropdown">
+
+                <button class="nav-dropdown-button"
+                        type="button">
+
+                    Services
+
+                    <i class="fa-solid fa-chevron-down arrow"></i>
+
+                </button>
+
+                <div class="nav-dropdown-menu">
+
+                    <a href="teeth-cleaning.html">
+                        Teeth Cleaning
+                    </a>
+
+                    <a href="root-canal-treatment.html">
+                        Root Canal Treatment
+                    </a>
+
+                    <a href="dental-filling.html">
+                        Dental Filling
+                    </a>
+
+                    <a href="tooth-extraction.html">
+                        Tooth Extraction
+                    </a>
+
+                    <a href="dental-crown.html">
+                        Dental Crown
+                    </a>
+
+                    <a href="dental-bridge.html">
+                        Dental Bridge
+                    </a>
+
+                    <a href="dentures.html">
+                        Dentures
+                    </a>
+
+                    <a href="dental-implant.html">
+                        Dental Implant
+                    </a>
+
+                    <a href="teeth-whitening.html">
+                        Teeth Whitening
+                    </a>
+
+                    <a href="gum-care.html">
+                        Gum Care
+                    </a>
+
+                    <a href="childrens-dentistry.html">
+                        Children's Dentistry
+                    </a>
+
+                    <a href="emergency-dental-care.html">
+                        Emergency Dental Care
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTACT -->
+
+            <div class="nav-dropdown">
+
+                <button class="nav-dropdown-button"
+                        type="button">
+
+                    Contact Us
+
+                    <i class="fa-solid fa-chevron-down arrow"></i>
+
+                </button>
+
+                <div class="nav-dropdown-menu">
+
+                    <a href="mailto:deelipshrestha90@gmail.com">
+                        Email
+                    </a>
+
+                    <a href="tel:9843093078">
+                        Phone
+                    </a>
+
+                    <a href="https://wa.me/9779843093078"
+                       target="_blank"
+                       rel="noopener">
+                        WhatsApp
+                    </a>
+
+                    <a href="inquiry.html">
+                        Send an Inquiry
+                    </a>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+        <!-- ACCOUNT -->
+
+        <div class="account-area">
+
+            <button class="account-button"
+                    type="button">
+
+                <i class="fa-regular fa-user"></i>
+
+                <span id="accountText">
+                    Login
+                </span>
+
+                <i class="fa-solid fa-chevron-down arrow"></i>
+
+            </button>
+
+
+            <div class="account-menu">
+
+                <a href="login.html">
+                    <i class="fa-brands fa-google"></i>
+                    Google Sign-In
+                </a>
+
+                <a href="admin.html"
+                   id="adminLink"
+                   style="display:none;">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Admin Panel
+
+                </a>
+
+                <button type="button"
+                        id="headerLogout"
+                        style="display:none;">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- MOBILE MENU BUTTON -->
+
+        <button class="mobile-menu-button"
+                id="mobileMenuButton"
+                type="button"
+                aria-label="Open navigation">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- MOBILE NAVIGATION -->
+
+    <nav class="mobile-navigation"
+         id="mobileNavigation"
+         aria-label="Mobile Navigation">
+
+        <a href="index.html">
+            Home
+        </a>
+
+
+        <div class="mobile-nav-dropdown">
+
+            <button class="mobile-nav-dropdown-button"
+                    type="button">
+
+                <span>Department</span>
+
+                <i class="fa-solid fa-chevron-down arrow"></i>
+
+            </button>
+
+            <div class="mobile-nav-dropdown-menu">
+
+                <a href="clinical-department.html">
+                    Clinical Department
+                </a>
+
+                <a href="clinic-science-department.html">
+                    Clinic Science Department
+                </a>
+
+                <a href="health-library.html">
+                    Health Library
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="mobile-nav-dropdown">
+
+            <button class="mobile-nav-dropdown-button"
+                    type="button">
+
+                <span>Treatments</span>
+
+                <i class="fa-solid fa-chevron-down arrow"></i>
+
+            </button>
+
+            <div class="mobile-nav-dropdown-menu">
+
+                <a href="teeth-cleaning.html">
+                    Teeth Cleaning
+                </a>
+
+                <a href="root-canal-treatment.html">
+                    Root Canal Treatment
+                </a>
+
+                <a href="dental-filling.html">
+                    Dental Filling
+                </a>
+
+                <a href="tooth-extraction.html">
+                    Tooth Extraction
+                </a>
+
+                <a href="dental-crown.html">
+                    Dental Crown
+                </a>
+
+                <a href="dental-bridge.html">
+                    Dental Bridge
+                </a>
+
+                <a href="dentures.html">
+                    Dentures
+                </a>
+
+                <a href="teeth-whitening.html">
+                    Teeth Whitening
+                </a>
+
+                <a href="gum-treatment.html">
+                    Gum Treatment
+                </a>
+
+                <a href="dental-implant.html">
+                    Dental Implant
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="mobile-nav-dropdown">
+
+            <button class="mobile-nav-dropdown-button"
+                    type="button">
+
+                <span>Knowledge</span>
+
+                <i class="fa-solid fa-chevron-down arrow"></i>
+
+            </button>
+
+            <div class="mobile-nav-dropdown-menu">
+
+                <a href="knowledge.html">
+                    Knowledge
+                </a>
+
+                <a href="blog.html">
+                    Blog
+                </a>
+
+                <a href="videos.html">
+                    Videos
+                </a>
+
+                <a href="research.html">
+                    Research
+                </a>
+
+                <a href="notice.html">
+                    Notice
+                </a>
+
+                <a href="journal.html">
+                    Journal
+                </a>
+
+                <a href="news.html">
+                    News
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="mobile-nav-dropdown">
+
+            <button class="mobile-nav-dropdown-button"
+                    type="button">
+
+                <span>Services</span>
+
+                <i class="fa-solid fa-chevron-down arrow"></i>
+
+            </button>
+
+            <div class="mobile-nav-dropdown-menu">
+
+                <a href="teeth-cleaning.html">
+                    Teeth Cleaning
+                </a>
+
+                <a href="root-canal-treatment.html">
+                    Root Canal Treatment
+                </a>
+
+                <a href="dental-filling.html">
+                    Dental Filling
+                </a>
+
+                <a href="tooth-extraction.html">
+                    Tooth Extraction
+                </a>
+
+                <a href="dental-crown.html">
+                    Dental Crown
+                </a>
+
+                <a href="dental-bridge.html">
+                    Dental Bridge
+                </a>
+
+                <a href="dentures.html">
+                    Dentures
+                </a>
+
+                <a href="dental-implant.html">
+                    Dental Implant
+                </a>
+
+                <a href="teeth-whitening.html">
+                    Teeth Whitening
+                </a>
+
+                <a href="gum-care.html">
+                    Gum Care
+                </a>
+
+                <a href="childrens-dentistry.html">
+                    Children's Dentistry
+                </a>
+
+                <a href="emergency-dental-care.html">
+                    Emergency Dental Care
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="mobile-nav-dropdown">
+
+            <button class="mobile-nav-dropdown-button"
+                    type="button">
+
+                <span>Contact Us</span>
+
+                <i class="fa-solid fa-chevron-down arrow"></i>
+
+            </button>
+
+            <div class="mobile-nav-dropdown-menu">
+
+                <a href="mailto:deelipshrestha90@gmail.com">
+                    Email
+                </a>
+
+                <a href="tel:9843093078">
+                    Phone
+                </a>
+
+                <a href="https://wa.me/9779843093078"
+                   target="_blank"
+                   rel="noopener">
+                    WhatsApp
+                </a>
+
+                <a href="inquiry.html">
+                    Send an Inquiry
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================================================
+     LOGIN
+========================================================= -->
+
+<main class="login-page">
+
+    <div class="login-wrapper">
+
+        <section class="login-card">
+
+            <img src="images/dental-logo.png"
+                 alt="Gajuri Dental Clinic"
+                 class="login-logo"
+                 width="90"
+                 height="90">
+
+            <h1>
+                Welcome
+            </h1>
+
+            <p class="subtitle">
+                Sign in with your Google account to access your Gajuri Dental Clinic account.
+            </p>
+
+
+            <!-- GOOGLE LOGIN -->
+
+            <button class="google-login-button"
+                    id="googleLoginButton"
+                    type="button">
+
+                <i class="fa-brands fa-google google-icon"></i>
+
+                <span>
+                    Continue with Google
+                </span>
+
+            </button>
+
+
+            <!-- STATUS -->
+
+            <div class="login-status"
+                 id="loginStatus"
+                 aria-live="polite">
+            </div>
+
+
+            <!-- LOGGED-IN USER -->
+
+            <div class="user-panel"
+                 id="userPanel">
+
+                <img id="userImage"
+                     class="user-image"
+                     src="images/dental-logo.png"
+                     alt="User profile">
+
+                <div class="user-name"
+                     id="userName">
+                </div>
+
+                <div class="user-email"
+                     id="userEmail">
+                </div>
+
+                <a href="account.html"
+                   class="dashboard-button">
+
+                    Open My Account
+
+                </a>
+
+                <br>
+
+                <button class="logout-button"
+                        id="logoutButton"
+                        type="button">
+
+                    Logout
+
+                </button>
+
+            </div>
+
+
+            <div class="security-note">
+
+                <i class="fa-solid fa-lock"></i>
+
+                Your account authentication is handled through Google and Firebase.
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="site-footer">
+
+    <div class="footer-container">
+
+
+        <!-- FOR PATIENTS -->
+
+        <div class="footer-column">
+
+            <h3>For Patients</h3>
+
+            <a href="find-a-doctor.html">
+                Find a Doctor
+            </a>
+
+            <a href="treatments.html">
+                Treatments
+            </a>
+
+            <a href="emergency.html">
+                Emergency 24*7
+            </a>
+
+            <a href="technology.html">
+                Technology
+            </a>
+
+        </div>
+
+
+        <!-- DEPARTMENT -->
+
+        <div class="footer-column">
+
+            <h3>Department</h3>
+
+            <a href="clinical-department.html">
+                Clinical Department
+            </a>
+
+            <a href="clinic-science-department.html">
+                Clinic Science Department
+            </a>
+
+            <a href="health-library.html">
+                Health Library
+            </a>
+
+        </div>
+
+
+        <!-- CORPORATE -->
+
+        <div class="footer-column">
+
+            <h3>Corporate</h3>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+            <a href="blog.html">
+                Blogs
+            </a>
+
+            <a href="careers.html">
+                Careers
+            </a>
+
+            <a href="contact.html">
+                Contact Us
+            </a>
+
+        </div>
+
+
+        <!-- INFORMATION -->
+
+        <div class="footer-column">
+
+            <h3>Information</h3>
+
+            <a href="news.html">
+                News & Events
+            </a>
+
+            <a href="policies.html">
+                Policies
+            </a>
+
+            <a href="forms.html">
+                Forms
+            </a>
+
+            <a href="notice.html">
+                Notices
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <div class="copyright">
+            © 2026 Gajuri Dental Clinic. All rights reserved.
+        </div>
+
+        <div class="social-links">
+
+            <a href="#"
+               aria-label="TikTok">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+
+            <a href="#"
+               aria-label="YouTube">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+
+            <a href="#"
+               aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <a href="https://wa.me/9779843093078?text=Hello%20Gajuri%20Dental%20Clinic%2C%20I%20want%20to%20check%20up."
+               target="_blank"
+               rel="noopener"
+               aria-label="WhatsApp">
+
+                <i class="fa-brands fa-whatsapp"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     FIREBASE + JAVASCRIPT
+========================================================= -->
+
+<script type="module">
+
+    /* =========================================================
+       FIREBASE IMPORTS
+    ========================================================= */
+
+    import {
+        initializeApp
+    }
+    from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+    import {
+        getAuth,
+        GoogleAuthProvider,
+        signInWithPopup,
+        onAuthStateChanged,
+        signOut
+    }
+    from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+    import {
+        getFirestore,
+        doc,
+        setDoc,
+        serverTimestamp
+    }
+    from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+    /* =========================================================
+       FIREBASE CONFIG
+    ========================================================= */
+
+    const firebaseConfig = {
+
+        apiKey:
+            "AIzaSyCjquLw6x8dAlqqs92v9T4GVe4AgysJ2Us",
+
+        authDomain:
+            "gajuridental.firebaseapp.com",
+
+        projectId:
+            "gajuridental",
+
+        storageBucket:
+            "gajuridental.firebasestorage.app",
+
+        messagingSenderId:
+            "1037808608519",
+
+        appId:
+            "1:1037808608519:web:32d4190b50bd08959251a2",
+
+        measurementId:
+            "G-FFNNX45D5V"
+    };
+
+
+    /* =========================================================
+       INITIALIZE FIREBASE
+    ========================================================= */
+
+    const app =
+        initializeApp(firebaseConfig);
+
+    const auth =
+        getAuth(app);
+
+    const db =
+        getFirestore(app);
+
+    const provider =
+        new GoogleAuthProvider();
+
+
+    /* =========================================================
+       HTML ELEMENTS
+    ========================================================= */
+
+    const googleLoginButton =
+        document.getElementById(
+            "googleLoginButton"
+        );
+
+    const logoutButton =
+        document.getElementById(
+            "logoutButton"
+        );
+
+    const headerLogout =
+        document.getElementById(
+            "headerLogout"
+        );
+
+    const loginStatus =
+        document.getElementById(
+            "loginStatus"
+        );
+
+    const userPanel =
+        document.getElementById(
+            "userPanel"
+        );
+
+    const userName =
+        document.getElementById(
+            "userName"
+        );
+
+    const userEmail =
+        document.getElementById(
+            "userEmail"
+        );
+
+    const userImage =
+        document.getElementById(
+            "userImage"
+        );
+
+    const accountText =
+        document.getElementById(
+            "accountText"
+        );
+
+
+    /* =========================================================
+       GOOGLE LOGIN
+    ========================================================= */
+
+    googleLoginButton.addEventListener(
+        "click",
+        async () => {
+
+            googleLoginButton.disabled = true;
+
+            loginStatus.textContent =
+                "Opening Google sign-in...";
+
+            loginStatus.className =
+                "login-status";
+
+
+            try {
+
+                const result =
+                    await signInWithPopup(
+                        auth,
+                        provider
+                    );
+
+
+                const user =
+                    result.user;
+
+
+                /*
+                 * Create/update the user's own
+                 * Firestore profile.
+                 *
+                 * Security Rules must ensure that
+                 * users can only write their own UID.
+                 */
+
+                await setDoc(
+                    doc(
+                        db,
+                        "users",
+                        user.uid
+                    ),
+                    {
+                        uid: user.uid,
+                        name: user.displayName || "",
+                        email: user.email || "",
+                        photoURL: user.photoURL || "",
+                        lastLogin:
+                            serverTimestamp()
+                    },
+                    {
+                        merge: true
+                    }
+                );
+
+
+                loginStatus.textContent =
+                    "Login successful.";
+
+                loginStatus.className =
+                    "login-status success";
+
+
+            } catch (error) {
+
+                console.error(
+                    "Google login error:",
+                    error
+                );
+
+
+                if (
+                    error.code ===
+                    "auth/popup-closed-by-user"
+                ) {
+
+                    loginStatus.textContent =
+                        "Google sign-in was cancelled.";
+
+                } else if (
+                    error.code ===
+                    "auth/popup-blocked"
+                ) {
+
+                    loginStatus.textContent =
+                        "Your browser blocked the Google sign-in window.";
+
+                } else {
+
+                    loginStatus.textContent =
+                        "Unable to sign in. Please try again.";
+
+                }
+
+
+                loginStatus.className =
+                    "login-status error";
+
+            }
+
+
+            googleLoginButton.disabled = false;
+
+        }
+    );
+
+
+    /* =========================================================
+       LOGOUT
+    ========================================================= */
+
+    async function logoutUser() {
+
+        try {
+
+            await signOut(auth);
+
+            loginStatus.textContent =
+                "You have been logged out.";
+
+            loginStatus.className =
+                "login-status success";
+
+        } catch (error) {
+
+            console.error(
+                "Logout error:",
+                error
+            );
+
+            loginStatus.textContent =
+                "Logout failed. Please try again.";
+
+            loginStatus.className =
+                "login-status error";
+
+        }
+
+    }
+
+
+    logoutButton.addEventListener(
+        "click",
+        logoutUser
+    );
+
+
+    headerLogout.addEventListener(
+        "click",
+        logoutUser
+    );
+
+
+    /* =========================================================
+       AUTH STATE
+    ========================================================= */
+
+    onAuthStateChanged(
+        auth,
+        (user) => {
+
+            if (user) {
+
+                googleLoginButton.style.display =
+                    "none";
+
+                userPanel.classList.add(
+                    "show"
+                );
+
+
+                userName.textContent =
+                    user.displayName ||
+                    "Google User";
+
+
+                userEmail.textContent =
+                    user.email ||
+                    "";
+
+
+                if (user.photoURL) {
+
+                    userImage.src =
+                        user.photoURL;
+
+                } else {
+
+                    userImage.src =
+                        "images/dental-logo.png";
+
+                }
+
+
+                accountText.textContent =
+                    "Account";
+
+
+                headerLogout.style.display =
+                    "flex";
+
+
+            } else {
+
+                googleLoginButton.style.display =
+                    "flex";
+
+                userPanel.classList.remove(
+                    "show"
+                );
+
+
+                accountText.textContent =
+                    "Login";
+
+
+                headerLogout.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       DESKTOP DROPDOWNS
+       CLICK ONLY
+    ========================================================= */
+
+    const dropdowns =
+        document.querySelectorAll(
+            ".nav-dropdown"
+        );
+
+
+    dropdowns.forEach(
+        (dropdown) => {
+
+            const button =
+                dropdown.querySelector(
+                    ".nav-dropdown-button"
+                );
+
+
+            button.addEventListener(
+                "click",
+                (event) => {
+
+                    event.stopPropagation();
+
+
+                    dropdowns.forEach(
+                        (otherDropdown) => {
+
+                            if (
+                                otherDropdown !==
+                                dropdown
+                            ) {
+
+                                otherDropdown.classList.remove(
+                                    "open"
+                                );
+
+                            }
+
+                        }
+                    );
+
+
+                    document
+                        .querySelector(
+                            ".account-area"
+                        )
+                        .classList.remove(
+                            "open"
+                        );
+
+
+                    dropdown.classList.toggle(
+                        "open"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       ACCOUNT DROPDOWN
+    ========================================================= */
+
+    const accountArea =
+        document.querySelector(
+            ".account-area"
+        );
+
+    const accountButton =
+        document.querySelector(
+            ".account-button"
+        );
+
+
+    accountButton.addEventListener(
+        "click",
+        (event) => {
+
+            event.stopPropagation();
+
+
+            dropdowns.forEach(
+                (dropdown) => {
+
+                    dropdown.classList.remove(
+                        "open"
+                    );
+
+                }
+            );
+
+
+            accountArea.classList.toggle(
+                "open"
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       CLICK OUTSIDE
+    ========================================================= */
+
+    document.addEventListener(
+        "click",
+        () => {
+
+            dropdowns.forEach(
+                (dropdown) => {
+
+                    dropdown.classList.remove(
+                        "open"
+                    );
+
+                }
+            );
+
+
+            accountArea.classList.remove(
+                "open"
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       MOBILE MENU
+    ========================================================= */
+
+    const mobileMenuButton =
+        document.getElementById(
+            "mobileMenuButton"
+        );
+
+    const mobileNavigation =
+        document.getElementById(
+            "mobileNavigation"
+        );
+
+
+    mobileMenuButton.addEventListener(
+        "click",
+        (event) => {
+
+            event.stopPropagation();
+
+            mobileNavigation.classList.toggle(
+                "active"
+            );
+
+
+            const icon =
+                mobileMenuButton.querySelector(
+                    "i"
+                );
+
+
+            if (
+                mobileNavigation.classList.contains(
+                    "active"
+                )
+            ) {
+
+                icon.className =
+                    "fa-solid fa-xmark";
+
+            } else {
+
+                icon.className =
+                    "fa-solid fa-bars";
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       MOBILE DROPDOWNS
+    ========================================================= */
+
+    const mobileDropdowns =
+        document.querySelectorAll(
+            ".mobile-nav-dropdown"
+        );
+
+
+    mobileDropdowns.forEach(
+        (dropdown) => {
+
+            const button =
+                dropdown.querySelector(
+                    ".mobile-nav-dropdown-button"
+                );
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    mobileDropdowns.forEach(
+                        (otherDropdown) => {
+
+                            if (
+                                otherDropdown !==
+                                dropdown
+                            ) {
+
+                                otherDropdown.classList.remove(
+                                    "open"
+                                );
+
+                            }
+
+                        }
+                    );
+
+
+                    dropdown.classList.toggle(
+                        "open"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       CLOSE MOBILE MENU AFTER LINK CLICK
+    ========================================================= */
+
+    mobileNavigation
+        .querySelectorAll("a")
+        .forEach(
+            (link) => {
+
+                link.addEventListener(
+                    "click",
+                    () => {
+
+                        mobileNavigation.classList.remove(
+                            "active"
+                        );
+
+                        mobileMenuButton
+                            .querySelector("i")
+                            .className =
+                            "fa-solid fa-bars";
+
+                    }
+                );
+
+            }
+        );
+
+</script>
+
+</body>
+</html>
+```
